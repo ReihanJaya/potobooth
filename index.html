@@ -1,0 +1,2993 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>VIBES.BOOTH ✦ Gen Z Digital Photobooth (Blok M & Virtual Companion Edition)</title>
+  <meta name="description" content="Gen Z Digital Photobooth aesthetic Blok M & Virtual Companion Edition. Foto bareng artis, K-pop idol, atau karakter anime langsung di browser. No server needed.">
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Plus Jakarta Sans, Space Grotesk, Courier Prime, Playfair Display, Cinzel, Pinyon Script -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'neon-pink': 'var(--color-primary, #ff2a85)',
+            'neon-yellow': 'var(--color-accent-yellow, #ffe600)',
+            'cyber-cyan': 'var(--color-accent-cyan, #00f0ff)',
+            'dark-bg': 'var(--color-bg-base, #0c0e14)',
+            'dark-card': 'var(--color-surface-card, #151822)',
+            'dark-border': 'var(--color-border-dark, #272c3d)',
+            'paper-cream': 'var(--color-vintage-paper, #f5efe1)',
+            'paper-ink': 'var(--color-vintage-ink, #171614)',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Space Grotesk"', 'sans-serif'],
+            mono: ['"Courier Prime"', 'monospace'],
+            'serif-vintage': ['"Playfair Display"', 'Georgia', 'serif'],
+            'calligraphy': ['"Pinyon Script"', 'cursive'],
+            'cinzel': ['"Cinzel"', 'serif'],
+          },
+          boxShadow: {
+            'neo': '4px 4px 0px #000000',
+            'neo-sm': '2px 2px 0px #000000',
+            'neo-pink': '4px 4px 0px #ff2a85',
+            'neo-yellow': '4px 4px 0px #ffe600',
+            'neo-cyan': '4px 4px 0px #00f0ff',
+            'neo-paper': '4px 4px 0px #171614',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* CSS Variables Design System - Vintage & Modern Harmony */
+    :root {
+      --color-bg-base: #0c0e14;
+      --color-surface-card: #151822;
+      --color-surface-card-hover: #1c202d;
+      --color-border-dark: #272c3d;
+      --color-border-strong: #000000;
+      
+      --color-text-primary: #f5f6fa;
+      --color-text-secondary: #9ea5b8;
+      --color-text-muted: #646a7d;
+
+      --color-primary: #ff2a85;
+      --color-primary-hover: #e01d73;
+      --color-accent-yellow: #ffe600;
+      --color-accent-cyan: #00f0ff;
+      --color-accent-crimson: #e63946;
+      --color-vintage-paper: #f5efe1;
+      --color-vintage-ink: #171614;
+
+      --font-family-sans: 'Plus Jakarta Sans', sans-serif;
+      --font-family-display: 'Space Grotesk', sans-serif;
+      --font-family-serif: 'Playfair Display', Georgia, serif;
+      --font-family-script: 'Pinyon Script', cursive;
+      --font-family-cinzel: 'Cinzel', serif;
+      --font-family-mono: 'Courier Prime', monospace;
+    }
+
+    body {
+      background-color: var(--color-bg-base);
+      color: var(--color-text-primary);
+      font-family: var(--font-family-sans);
+      background-image: radial-gradient(rgba(255, 42, 133, 0.08) 1px, transparent 0),
+                        radial-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 0);
+      background-size: 24px 24px;
+      background-position: 0 0, 12px 12px;
+      overflow-x: hidden;
+    }
+
+    /* Chunky Neo-brutalist buttons */
+    .btn-brutal {
+      transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 3px 3px 0px #000;
+    }
+    .btn-brutal:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0px #000;
+    }
+    .btn-brutal:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px #000;
+    }
+
+    /* Live camera filter presets */
+    .filter-normal { filter: none; }
+    .filter-film { filter: contrast(115%) saturate(125%) sepia(20%) brightness(102%); }
+    .filter-pink { filter: contrast(95%) brightness(108%) saturate(130%) hue-rotate(-15deg); }
+    .filter-mono { filter: grayscale(100%) contrast(150%) brightness(95%); }
+    .filter-vhs { filter: contrast(120%) saturate(140%) hue-rotate(25deg) brightness(105%); }
+    .filter-sepia { filter: sepia(75%) contrast(110%) brightness(95%) saturate(85%); }
+
+    /* Mirroring for front camera */
+    .mirror-mode {
+      transform: scaleX(-1);
+    }
+
+    /* VHS scanlines overlay */
+    .vhs-overlay {
+      background: linear-gradient(
+        rgba(18, 16, 16, 0) 50%, 
+        rgba(0, 0, 0, 0.35) 50%
+      ), linear-gradient(
+        90deg,
+        rgba(255, 0, 0, 0.06),
+        rgba(0, 255, 0, 0.02),
+        rgba(0, 0, 255, 0.06)
+      );
+      background-size: 100% 3px, 6px 100%;
+      pointer-events: none;
+    }
+
+    /* Flash screen effect */
+    @keyframes shutterFlash {
+      0% { opacity: 0.95; }
+      100% { opacity: 0; }
+    }
+    .flash-active {
+      animation: shutterFlash 0.35s ease-out forwards;
+    }
+
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #11141c;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #ff2a85;
+      border-radius: 3px;
+    }
+
+    /* Sticker on preview styling */
+    .sticker-item {
+      user-select: none;
+      touch-action: none;
+      cursor: grab;
+      position: absolute;
+    }
+    .sticker-item:active {
+      cursor: grabbing;
+    }
+    .sticker-selected {
+      outline: 2px dashed #00f0ff;
+      outline-offset: 4px;
+      z-index: 30;
+    }
+
+    /* Draggable Virtual Companion */
+    #companion-overlay-container {
+      user-select: none;
+      touch-action: none;
+      cursor: grab;
+    }
+    #companion-overlay-container:active {
+      cursor: grabbing;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-neon-pink selection:text-white">
+
+  <!-- ================= TOP NAVIGATION BAR ================= -->
+  <header class="sticky top-0 z-40 bg-[#0e1017]/90 backdrop-blur-md border-b-2 border-black px-4 py-2.5">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
+      <!-- Logo & Tagline -->
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 bg-neon-pink border-2 border-black flex items-center justify-center font-display font-black text-white text-xl shadow-neo-sm transform -rotate-3">
+          V
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <h1 class="font-display font-black text-lg md:text-xl tracking-tight text-white flex items-center gap-1">
+              VIBES<span class="text-neon-pink">.</span>BOOTH
+            </h1>
+            <span class="bg-neon-yellow text-black text-[10px] font-bold px-1.5 py-0.5 rounded border border-black uppercase font-display">
+              Blok M 2026
+            </span>
+          </div>
+          <p class="text-[11px] text-zinc-400 font-mono hidden sm:block">Digital Photobooth & Virtual Companion Edition</p>
+        </div>
+      </div>
+
+      <!-- Center Active Mode Badge & Changer -->
+      <div class="flex items-center gap-2">
+        <button id="btn-change-mode" class="btn-brutal bg-dark-card border-2 border-black text-white hover:border-neon-pink px-2.5 py-1.5 rounded-md flex items-center gap-2 text-xs font-bold transition">
+          <span id="current-mode-indicator" class="w-2.5 h-2.5 rounded-full bg-neon-pink animate-pulse"></span>
+          <span id="current-mode-title" class="truncate max-w-[120px] sm:max-w-[180px]">Classic Photobooth</span>
+          <span class="bg-neon-pink/20 text-neon-pink px-1 rounded text-[10px] uppercase font-mono">Ganti Mode ▾</span>
+        </button>
+      </div>
+
+      <!-- Right Controls: Audio Toggle & Reset -->
+      <div class="flex items-center gap-2">
+        <button id="btn-toggle-sound" class="btn-brutal bg-dark-card border-2 border-black p-2 rounded-md text-white hover:text-neon-yellow text-xs font-mono" title="Toggle Sound FX">
+          <span id="sound-icon">🔊</span>
+        </button>
+        <button id="btn-retake" class="btn-brutal bg-red-600 hover:bg-red-500 border-2 border-black text-white px-2.5 sm:px-3 py-1.5 rounded-md text-xs font-bold uppercase tracking-wide flex items-center gap-1">
+          <span>🔄</span> <span class="hidden sm:inline">Foto Ulang</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= MAIN WORKSPACE: DUAL PANEL ================= -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-3 sm:p-5 grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+    
+    <!-- ================= LEFT PANEL: LIVE CAMERA STUDIO ================= -->
+    <section class="lg:col-span-7 flex flex-col gap-4">
+      
+      <!-- Studio Header Card -->
+      <div class="bg-dark-card border-2 border-black p-3 rounded-xl shadow-neo flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-red-500 animate-ping"></span>
+          <span class="font-display font-bold text-sm tracking-wide uppercase text-zinc-200">Live Camera Booth</span>
+        </div>
+        <!-- Progress Indicator -->
+        <div class="flex items-center gap-1.5">
+          <span class="text-xs font-mono text-zinc-400">Captured:</span>
+          <div class="flex gap-1" id="capture-dots-container">
+            <span class="capture-dot w-2.5 h-2.5 rounded-full bg-zinc-700 border border-zinc-600"></span>
+            <span class="capture-dot w-2.5 h-2.5 rounded-full bg-zinc-700 border border-zinc-600"></span>
+            <span class="capture-dot w-2.5 h-2.5 rounded-full bg-zinc-700 border border-zinc-600"></span>
+            <span class="capture-dot w-2.5 h-2.5 rounded-full bg-zinc-700 border border-zinc-600"></span>
+          </div>
+          <span id="capture-count-label" class="text-xs font-mono font-bold text-neon-yellow ml-1">0/4</span>
+        </div>
+      </div>
+
+      <!-- Main Camera Viewport Box -->
+      <div id="camera-viewport-box" class="relative bg-black border-3 border-black rounded-2xl overflow-hidden shadow-neo-pink aspect-[4/3] sm:aspect-[4/3] w-full flex items-center justify-center group select-none">
+        
+        <!-- Live Video Element -->
+        <video id="camera-video" autoplay playsinline muted class="absolute inset-0 w-full h-full object-cover mirror-mode filter-normal transition-all duration-200"></video>
+        
+        <!-- Fallback Demo Image (if camera is disabled/testing) -->
+        <img id="demo-image" src="" alt="Demo Selfie" class="hidden absolute inset-0 w-full h-full object-cover filter-normal transition-all duration-200" />
+
+        <!-- VHS Scanline Overlay Layer -->
+        <div id="vhs-scanlines" class="hidden absolute inset-0 vhs-overlay z-10 pointer-events-none"></div>
+
+        <!-- 35mm Film Grain / Texture Overlay Layer -->
+        <div id="film-grain-layer" class="hidden absolute inset-0 opacity-20 pointer-events-none mix-blend-overlay z-10" style="background-image: url('data:image/svg+xml;utf8,<svg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'noise\'><feTurbulence type=\'fractalNoise\' baseFrequency=\'0.85\' numOctaves=\'3\' stitchTiles=\'stitch\'/></filter><rect width=\'100%\' height=\'100%\' filter=\'url(%23noise)\'/></svg>');"></div>
+
+        <!-- Virtual Companion Overlay (Modes 2 & 3) - Free Drag & Drop (Mouse & Touch) -->
+        <div id="companion-overlay-container" class="hidden absolute z-20 pointer-events-auto cursor-grab active:cursor-grabbing select-none group touch-none transition-transform duration-75" style="left: 75%; top: 65%; transform: translate(-50%, -50%);">
+          <!-- Floating Drag Helper Tooltip -->
+          <div class="companion-drag-tooltip absolute -top-7 left-1/2 -translate-x-1/2 bg-black/85 text-neon-yellow border border-neon-yellow/50 text-[10px] font-mono px-2 py-0.5 rounded-full flex items-center gap-1 shadow-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+            <span>✥</span> Geser Bebas (Mouse / Touch)
+          </div>
+          <img id="companion-img" src="" alt="Virtual Companion" class="max-h-[220px] sm:max-h-[280px] object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.6)] pointer-events-none select-none" />
+        </div>
+
+        <!-- Interactive Screen Flash Overlay -->
+        <div id="camera-flash" class="absolute inset-0 bg-white pointer-events-none opacity-0 z-30"></div>
+
+        <!-- Interactive Countdown Overlay (3.. 2.. 1.. CHEESE!) -->
+        <div id="countdown-overlay" class="hidden absolute inset-0 z-30 flex flex-col items-center justify-center bg-black/40 backdrop-blur-sm">
+          <div id="countdown-number" class="font-display font-black text-8xl md:text-9xl text-neon-yellow drop-shadow-[0_6px_0px_#000] scale-110 transition-transform">
+            3
+          </div>
+          <div id="countdown-subtext" class="font-display font-bold text-sm md:text-base text-white uppercase tracking-widest bg-neon-pink px-4 py-1 rounded-full border-2 border-black mt-2">
+            Get Ready! ✨
+          </div>
+        </div>
+
+        <!-- Camera Off / Permission Blocked Banner -->
+        <div id="camera-fallback-banner" class="hidden absolute inset-0 z-20 flex flex-col items-center justify-center p-6 text-center bg-zinc-950/95">
+          <div class="w-14 h-14 bg-neon-yellow/10 border-2 border-neon-yellow text-neon-yellow rounded-2xl flex items-center justify-center text-3xl mb-3">
+            📷
+          </div>
+          <h2 class="text-base font-display font-bold text-white mb-1">Kamera Belum Aktif atau Diizinkan</h2>
+          <p class="text-xs text-zinc-400 max-w-sm mb-4 font-mono">Aktifkan izin kamera untuk foto langsung, atau gunakan mode demo bawaan di bawah ini untuk menguji semua fitur!</p>
+          <div class="flex flex-wrap gap-2 justify-center">
+            <button id="btn-request-cam" class="btn-brutal bg-neon-pink text-white px-3 py-1.5 rounded-lg border-2 border-black text-xs font-bold">
+              ⚡ Izinkan Kamera
+            </button>
+            <button id="btn-use-demo-photo" class="btn-brutal bg-neon-yellow text-black px-3 py-1.5 rounded-lg border-2 border-black text-xs font-bold">
+              ✨ Gunakan Demo Selfie
+            </button>
+            <label class="btn-brutal bg-dark-card text-white hover:text-cyber-cyan px-3 py-1.5 rounded-lg border-2 border-black text-xs font-bold cursor-pointer">
+              📁 Upload Foto Sendiri
+              <input type="file" id="input-custom-photo" accept="image/*" class="hidden" />
+            </label>
+          </div>
+        </div>
+
+        <!-- Camera Top Badges -->
+        <div class="absolute top-3 left-3 right-3 flex items-center justify-between z-20 pointer-events-none">
+          <span class="bg-black/75 border border-white/20 text-white font-mono text-[11px] px-2.5 py-1 rounded-full flex items-center gap-1.5 backdrop-blur-md">
+            <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+            <span id="cam-resolution-badge">HD 720p</span>
+          </span>
+          <span id="active-filter-badge" class="bg-black/75 border border-white/20 text-neon-yellow font-mono text-[11px] px-2.5 py-1 rounded-full backdrop-blur-md">
+            Filter: Normal
+          </span>
+        </div>
+
+        <!-- Camera Quick Control Overlay (Bottom) -->
+        <div class="absolute bottom-3 right-3 z-20 flex gap-1.5">
+          <button id="btn-mirror-toggle" class="btn-brutal bg-black/80 hover:bg-black text-white p-2 rounded-lg border border-white/20 text-xs backdrop-blur-md" title="Mirror Mode On/Off">
+            🪞 Flip Mirror
+          </button>
+          <button id="btn-flip-cam" class="btn-brutal bg-black/80 hover:bg-black text-white p-2 rounded-lg border border-white/20 text-xs backdrop-blur-md" title="Switch Front/Back Camera">
+            🔄 Ganti Kamera
+          </button>
+        </div>
+      </div>
+
+      <!-- Big Capture Trigger Button -->
+      <div class="flex flex-col sm:flex-row gap-3 items-stretch">
+        <button id="btn-start-capture" class="btn-brutal flex-1 bg-neon-pink hover:bg-pink-500 text-white font-display font-black text-lg sm:text-xl py-3.5 px-6 rounded-xl border-3 border-black shadow-neo flex items-center justify-center gap-3 active:scale-95 transition">
+          <span class="text-2xl">📸</span>
+          <span>AMBIL FOTO SEKARANG</span>
+          <span class="text-xs bg-black/30 font-mono font-normal px-2 py-0.5 rounded border border-white/30 hidden sm:inline">3s COUNTDOWN</span>
+        </button>
+      </div>
+
+      <!-- Virtual Companion Selector Drawer (Visible in Mode 2 & 3) -->
+      <div id="companion-controls-box" class="hidden bg-dark-card border-2 border-black p-3.5 rounded-xl shadow-neo">
+        <div class="flex items-center justify-between mb-2.5">
+          <div class="flex items-center gap-2">
+            <span class="text-base" id="companion-box-icon">🌟</span>
+            <h2 class="font-display font-bold text-sm text-white" id="companion-box-title">Pilih Virtual Companion:</h2>
+          </div>
+          <span class="text-[11px] font-mono text-neon-yellow" id="companion-box-subtitle">Geser & Posisikan</span>
+        </div>
+
+        <!-- Carousel / Thumbnails -->
+        <div class="flex gap-2.5 overflow-x-auto pb-2" id="companion-thumbnail-list">
+          <!-- Dynamically filled by JS -->
+        </div>
+
+        <!-- Companion Tuning Controls (Position, Scale, Flip) -->
+        <div class="mt-3 pt-3 border-t border-dark-border grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs">
+          <!-- Position (Left / Center / Right) -->
+          <div>
+            <label class="block text-zinc-400 font-mono text-[10px] uppercase mb-1">Posisi Karakter:</label>
+            <div class="grid grid-cols-3 gap-1 bg-black/40 p-1 rounded-lg border border-zinc-800">
+              <button class="companion-pos-btn py-1 rounded text-center font-bold text-zinc-400 hover:text-white" data-pos="left">Kiri</button>
+              <button class="companion-pos-btn py-1 rounded text-center font-bold text-zinc-400 hover:text-white" data-pos="center">Tengah</button>
+              <button class="companion-pos-btn py-1 rounded text-center font-bold bg-neon-pink text-white" data-pos="right">Kanan</button>
+            </div>
+          </div>
+          <!-- Scale Slider -->
+          <div>
+            <div class="flex justify-between text-zinc-400 font-mono text-[10px] uppercase mb-1">
+              <span>Ukuran Karakter:</span>
+              <span id="companion-scale-val" class="text-neon-pink font-bold">100%</span>
+            </div>
+            <input type="range" id="companion-scale-slider" min="50" max="150" value="100" class="w-full accent-neon-pink" />
+          </div>
+          <!-- Flip & Custom PNG Upload -->
+          <div class="flex items-end gap-1.5">
+            <button id="btn-flip-companion" class="btn-brutal flex-1 bg-zinc-800 hover:bg-zinc-700 text-white border border-black py-1.5 px-2 rounded-lg text-[11px] font-bold">
+              ↔️ Balik Arah
+            </button>
+            <label class="btn-brutal bg-neon-yellow text-black hover:bg-yellow-400 border border-black py-1.5 px-2 rounded-lg text-[11px] font-bold cursor-pointer text-center" title="Upload custom transparent PNG">
+              ➕ Upload PNG
+              <input type="file" id="input-custom-companion" accept="image/png,image/webp" class="hidden" />
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real-time Filter Selector Strip -->
+      <div class="bg-dark-card border-2 border-black p-3.5 rounded-xl shadow-neo">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-display font-bold text-xs uppercase tracking-wider text-zinc-300 flex items-center gap-1.5">
+            🎞️ Live Film & Aesthetics Filters:
+          </span>
+          <span class="text-[10px] font-mono text-zinc-400">Pilih efek kamera</span>
+        </div>
+        <div class="grid grid-cols-3 sm:grid-cols-6 gap-2">
+          <button class="filter-btn btn-brutal border-2 border-neon-pink bg-black text-white p-2 rounded-lg text-center" data-filter="normal">
+            <div class="text-xs font-bold font-display">Normal</div>
+            <div class="text-[9px] font-mono text-zinc-400">Clean Real</div>
+          </button>
+          <button class="filter-btn btn-brutal border-2 border-black bg-zinc-900 text-zinc-300 hover:text-white p-2 rounded-lg text-center" data-filter="film">
+            <div class="text-xs font-bold font-display text-amber-300">35mm Film</div>
+            <div class="text-[9px] font-mono text-zinc-400">Warm Grain</div>
+          </button>
+          <button class="filter-btn btn-brutal border-2 border-black bg-zinc-900 text-zinc-300 hover:text-white p-2 rounded-lg text-center" data-filter="pink">
+            <div class="text-xs font-bold font-display text-pink-400">Y2K Pink</div>
+            <div class="text-[9px] font-mono text-zinc-400">Dreamy Glow</div>
+          </button>
+          <button class="filter-btn btn-brutal border-2 border-black bg-zinc-900 text-zinc-300 hover:text-white p-2 rounded-lg text-center" data-filter="mono">
+            <div class="text-xs font-bold font-display text-zinc-200">Noir B&W</div>
+            <div class="text-[9px] font-mono text-zinc-400">High Contrast</div>
+          </button>
+          <button class="filter-btn btn-brutal border-2 border-black bg-zinc-900 text-zinc-300 hover:text-white p-2 rounded-lg text-center" data-filter="vhs">
+            <div class="text-xs font-bold font-display text-cyan-400">VHS Tape</div>
+            <div class="text-[9px] font-mono text-zinc-400">90s Camcorder</div>
+          </button>
+          <button class="filter-btn btn-brutal border-2 border-black bg-zinc-900 text-zinc-300 hover:text-white p-2 rounded-lg text-center" data-filter="sepia">
+            <div class="text-xs font-bold font-display text-yellow-600">Sepia 90s</div>
+            <div class="text-[9px] font-mono text-zinc-400">Golden Muted</div>
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================= RIGHT PANEL: CANVAS EDITOR & PHOTO STRIP PREVIEW ================= -->
+    <section class="lg:col-span-5 flex flex-col gap-4">
+
+      <!-- Navigation Tabs: Style / Stickers / Text -->
+      <div class="bg-dark-card border-2 border-black p-1.5 rounded-xl shadow-neo flex gap-1">
+        <button class="tab-btn flex-1 py-1.5 px-2 rounded-lg font-display font-bold text-xs bg-neon-pink text-white border border-black shadow-neo-sm" data-tab="tab-layout">
+          📐 Layout & Frame
+        </button>
+        <button class="tab-btn flex-1 py-1.5 px-2 rounded-lg font-display font-bold text-xs text-zinc-300 hover:text-white" data-tab="tab-stickers">
+          🏷️ Stiker & Cap
+        </button>
+        <button class="tab-btn flex-1 py-1.5 px-2 rounded-lg font-display font-bold text-xs text-zinc-300 hover:text-white" data-tab="tab-text">
+          ✍️ Teks & Stempel
+        </button>
+      </div>
+
+      <!-- Tab Content 1: Layout & Frame Customization -->
+      <div id="tab-layout" class="tab-panel bg-dark-card border-2 border-black p-4 rounded-xl shadow-neo flex flex-col gap-3.5">
+        
+        <!-- Capture Layout Selection -->
+        <div>
+          <label class="block text-zinc-300 font-display font-bold text-xs uppercase mb-1.5">Pilih Format Cetak:</label>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <button class="layout-btn btn-brutal border-2 border-neon-pink bg-black text-white p-2 rounded-lg text-center" data-layout="strip">
+              <div class="text-xs font-bold font-display">4-Cuts Strip</div>
+              <div class="text-[9px] font-mono text-zinc-400">Vertikal 1x4</div>
+            </button>
+            <button class="layout-btn btn-brutal border-2 border-black bg-zinc-900 text-zinc-400 hover:text-white p-2 rounded-lg text-center" data-layout="grid">
+              <div class="text-xs font-bold font-display">2x2 Grid</div>
+              <div class="text-[9px] font-mono text-zinc-400">Kotak 4 Foto</div>
+            </button>
+            <button class="layout-btn btn-brutal border-2 border-black bg-zinc-900 text-zinc-400 hover:text-white p-2 rounded-lg text-center" data-layout="single">
+              <div class="text-xs font-bold font-display">Polaroid</div>
+              <div class="text-[9px] font-mono text-zinc-400">Single Shot</div>
+            </button>
+            <button class="layout-btn btn-brutal border-2 border-black bg-zinc-900 text-zinc-400 hover:text-white p-2 rounded-lg text-center" data-layout="newspaper">
+              <div class="text-xs font-bold font-display flex items-center justify-center gap-1">📰 Newspaper</div>
+              <div class="text-[9px] font-mono text-zinc-400">Koran Vintage</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Newspaper Location Preset Selector (Revealed when Newspaper Layout is Active) -->
+        <div id="newspaper-location-box" class="hidden bg-black/60 border-2 border-zinc-700 p-3 rounded-xl flex flex-col gap-2.5 shadow-neo">
+          <div class="flex items-center justify-between">
+            <label class="text-neon-yellow font-display font-bold text-xs uppercase flex items-center gap-1.5">
+              <span>📰</span> Preset Lokasi Koran Vintage:
+            </label>
+            <span class="text-[10px] font-mono text-zinc-300 bg-zinc-800 px-2 py-0.5 rounded border border-zinc-700" id="newspaper-current-edition-label">Paris van Java</span>
+          </div>
+          
+          <div class="grid grid-cols-3 gap-2">
+            <button class="newspaper-loc-btn btn-brutal border-2 border-neon-pink bg-zinc-800 text-white p-2 rounded-lg text-center" data-loc="braga">
+              <div class="text-xs font-bold font-serif-vintage tracking-wide">🏛️ BRAGA</div>
+              <div class="text-[9px] font-mono text-zinc-400">Bandung</div>
+            </button>
+            <button class="newspaper-loc-btn btn-brutal border-2 border-black bg-zinc-900 text-zinc-400 hover:text-white p-2 rounded-lg text-center" data-loc="blokm">
+              <div class="text-xs font-bold font-serif-vintage tracking-wide">🏙️ BLOK M</div>
+              <div class="text-[9px] font-mono text-zinc-400">Jakarta</div>
+            </button>
+            <button class="newspaper-loc-btn btn-brutal border-2 border-black bg-zinc-900 text-zinc-400 hover:text-white p-2 rounded-lg text-center" data-loc="malioboro">
+              <div class="text-xs font-bold font-serif-vintage tracking-wide">🏮 MALIOBORO</div>
+              <div class="text-[9px] font-mono text-zinc-400">Yogyakarta</div>
+            </button>
+          </div>
+
+          <p class="text-[10px] text-zinc-400 font-mono italic" id="newspaper-location-hint">
+            ✦ Edisi Paris van Java: "Braga Street: The Living Archive of Elegance and Art"
+          </p>
+        </div>
+
+        <!-- Frame Motif & Pattern Selection -->
+        <div>
+          <label class="block text-zinc-300 font-display font-bold text-xs uppercase mb-1.5">Motif & Desain Bingkai:</label>
+          <div class="grid grid-cols-3 gap-2">
+            <button class="frame-motif-btn btn-brutal border-2 border-neon-pink bg-black text-white p-2 rounded-lg text-center text-xs font-bold" data-motif="solid">
+              Solid Minimal
+            </button>
+            <button class="frame-motif-btn btn-brutal border-2 border-black bg-zinc-900 text-zinc-400 hover:text-white p-2 rounded-lg text-center text-xs font-bold" data-motif="checker">
+              🏁 Checkerboard
+            </button>
+            <button class="frame-motif-btn btn-brutal border-2 border-black bg-zinc-900 text-zinc-400 hover:text-white p-2 rounded-lg text-center text-xs font-bold" data-motif="filmstrip">
+              🎞️ 35mm Filmstrip
+            </button>
+            <button class="frame-motif-btn btn-brutal border-2 border-black bg-zinc-900 text-zinc-400 hover:text-white p-2 rounded-lg text-center text-xs font-bold" data-motif="hearts">
+              💖 Retro Hearts
+            </button>
+            <button class="frame-motif-btn btn-brutal border-2 border-black bg-zinc-900 text-zinc-400 hover:text-white p-2 rounded-lg text-center text-xs font-bold" data-motif="blokm">
+              📰 Blok M Vintage
+            </button>
+            <button class="frame-motif-btn btn-brutal border-2 border-black bg-zinc-900 text-zinc-400 hover:text-white p-2 rounded-lg text-center text-xs font-bold" data-motif="cyber">
+              ⚡ Cyber Neon
+            </button>
+          </div>
+        </div>
+
+        <!-- Solid Frame Color Presets -->
+        <div>
+          <label class="block text-zinc-300 font-display font-bold text-xs uppercase mb-1.5">Warna Bingkai Dasar:</label>
+          <div class="flex flex-wrap gap-2 items-center">
+            <button class="frame-color-btn w-7 h-7 rounded-full border-2 border-white shadow-neo-sm bg-[#12141c]" data-color="#12141c" title="Deep Dark"></button>
+            <button class="frame-color-btn w-7 h-7 rounded-full border-2 border-black bg-[#f4f1ea]" data-color="#f4f1ea" title="Cream White"></button>
+            <button class="frame-color-btn w-7 h-7 rounded-full border-2 border-black bg-[#ffb7db]" data-color="#ffb7db" title="Baby Pink"></button>
+            <button class="frame-color-btn w-7 h-7 rounded-full border-2 border-black bg-[#bae6fd]" data-color="#bae6fd" title="Pastel Blue"></button>
+            <button class="frame-color-btn w-7 h-7 rounded-full border-2 border-black bg-[#bbf7d0]" data-color="#bbf7d0" title="Mint Matcha"></button>
+            <button class="frame-color-btn w-7 h-7 rounded-full border-2 border-black bg-[#fef08a]" data-color="#fef08a" title="Electric Yellow"></button>
+            <button class="frame-color-btn w-7 h-7 rounded-full border-2 border-black bg-[#e9d5ff]" data-color="#e9d5ff" title="Lilac Violet"></button>
+            <label class="w-7 h-7 rounded-full border-2 border-black bg-gradient-to-tr from-pink-500 to-yellow-400 flex items-center justify-center cursor-pointer text-xs" title="Custom Color">
+              🎨
+              <input type="color" id="frame-custom-color" value="#12141c" class="hidden" />
+            </label>
+          </div>
+        </div>
+
+        <!-- Corner Style (Square / Rounded) -->
+        <div class="flex items-center justify-between pt-2 border-t border-dark-border">
+          <span class="text-xs font-mono text-zinc-300">Gaya Sudut Foto:</span>
+          <div class="flex gap-1.5">
+            <button class="corner-btn btn-brutal px-2.5 py-1 text-xs font-bold rounded bg-zinc-800 text-zinc-400 hover:text-white" data-radius="0">Square (Tajam)</button>
+            <button class="corner-btn btn-brutal px-2.5 py-1 text-xs font-bold rounded bg-neon-pink text-white" data-radius="12">Rounded (Lengkung)</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Tab Content 2: Stickers & Gen Z Badges -->
+      <div id="tab-stickers" class="tab-panel hidden bg-dark-card border-2 border-black p-4 rounded-xl shadow-neo flex flex-col gap-3">
+        <div class="flex items-center justify-between">
+          <label class="text-zinc-300 font-display font-bold text-xs uppercase">Klik Stiker Untuk Ditambahkan:</label>
+          <button id="btn-clear-stickers" class="text-[11px] font-mono text-red-400 hover:text-red-300">Hapus Semua 🗑️</button>
+        </div>
+        <p class="text-[11px] text-zinc-400 font-mono">💡 Tips: Tarik & geser stiker langsung di atas preview foto untuk mengatur posisi!</p>
+
+        <!-- Sticker Grid Library -->
+        <div class="grid grid-cols-4 sm:grid-cols-6 gap-2 bg-black/40 p-2.5 rounded-xl border border-zinc-800 max-h-48 overflow-y-auto" id="sticker-library">
+          <!-- Dynamically populated or static stickers -->
+        </div>
+
+        <!-- Active Sticker Controls (Scale & Remove) -->
+        <div id="active-sticker-controls" class="p-2.5 bg-zinc-900 border border-zinc-700 rounded-lg text-xs flex items-center justify-between gap-3">
+          <span class="text-zinc-400 font-mono text-[11px]">Ukuran Stiker:</span>
+          <input type="range" id="sticker-scale-slider" min="40" max="180" value="80" class="flex-1 accent-cyber-cyan" />
+          <button id="btn-delete-selected-sticker" class="btn-brutal bg-red-600 text-white px-2 py-1 rounded text-[11px] font-bold">
+            Hapus Stiker
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab Content 3: Text, Watermarks & Date -->
+      <div id="tab-text" class="tab-panel hidden bg-dark-card border-2 border-black p-4 rounded-xl shadow-neo flex flex-col gap-3.5">
+        <!-- Header / Watermark Stamp Preset -->
+        <div>
+          <label class="block text-zinc-300 font-display font-bold text-xs uppercase mb-1">Header Stamp Preset:</label>
+          <select id="select-watermark" class="w-full bg-black border-2 border-zinc-700 text-white p-2 rounded-lg font-mono text-xs focus:border-neon-pink focus:outline-none">
+            <option value="BLOK M VIBES ✦ 2026">✦ BLOK M VIBES ✦ 2026</option>
+            <option value="SEOUL FILM 90s ★">SEOUL FILM 90s ★</option>
+            <option value="JAKARTA NIGHTS • 02:45 AM">JAKARTA NIGHTS • 02:45 AM</option>
+            <option value="NOSTALGIA STUDIO // VOL. 04">NOSTALGIA STUDIO // VOL. 04</option>
+            <option value="LIFE FOUR CUTS 📸">LIFE FOUR CUTS 📸</option>
+            <option value="CUSTOM">-- Ketik Header Sendiri --</option>
+          </select>
+          <input type="text" id="custom-watermark-input" placeholder="Tulis header kamu..." class="hidden mt-2 w-full bg-black border border-zinc-700 text-white px-2.5 py-1.5 rounded-lg text-xs font-mono" />
+        </div>
+
+        <!-- Date & Time Stamp -->
+        <div class="flex items-center justify-between p-2.5 bg-black/40 rounded-lg border border-zinc-800">
+          <div>
+            <div class="text-xs font-bold text-white font-mono">Timestamp Otomatis</div>
+            <div class="text-[10px] text-zinc-400 font-mono" id="current-datetime-preview">2026.10.06 20:46</div>
+          </div>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" id="toggle-date-stamp" checked class="sr-only peer">
+            <div class="w-9 h-5 bg-zinc-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-neon-pink"></div>
+          </label>
+        </div>
+
+        <!-- Custom Caption Input -->
+        <div>
+          <label class="block text-zinc-300 font-display font-bold text-xs uppercase mb-1">Custom Caption (Bawah Frame):</label>
+          <input type="text" id="input-custom-caption" value="besties date in blok m 🖤" placeholder="Tulis caption singkat..." maxlength="40" class="w-full bg-black border-2 border-zinc-700 text-white px-3 py-2 rounded-lg font-mono text-xs focus:border-neon-pink focus:outline-none" />
+          <div class="flex justify-between text-[10px] text-zinc-500 font-mono mt-1">
+            <span>Maksimal 40 karakter</span>
+            <span id="caption-char-count">24/40</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Photo Strip Preview Box & Canvas Container -->
+      <div class="bg-dark-card border-2 border-black p-4 rounded-xl shadow-neo flex flex-col items-center">
+        
+        <div class="w-full flex items-center justify-between mb-3">
+          <span class="font-display font-bold text-xs uppercase tracking-wider text-zinc-300 flex items-center gap-1.5">
+            🖼️ Live Photo Strip Preview:
+          </span>
+          <span class="text-[10px] font-mono text-neon-pink bg-neon-pink/10 px-2 py-0.5 rounded border border-neon-pink/30">
+            Realtime Render
+          </span>
+        </div>
+
+        <!-- Interactive Wrapper for Canvas & Draggable Stickers -->
+        <div id="photostrip-stage" class="max-h-[520px] overflow-hidden flex items-center justify-center p-2 rounded-xl transition-all w-full" style="background-color: #12141c;">
+          <div id="canvas-stage-wrapper" class="relative inline-block">
+            <!-- Interactive HTML5 Canvas (Composite Renderer) -->
+            <canvas id="composite-canvas" class="max-h-[500px] w-auto h-auto max-w-full rounded shadow-2xl block"></canvas>
+
+            <!-- Sticker Interactive Overlay Surface -->
+            <div id="stickers-interactive-surface" class="absolute inset-0 pointer-events-auto overflow-hidden rounded"></div>
+          </div>
+        </div>
+
+        <!-- Download & Export Action Bar -->
+        <div class="w-full mt-4 flex flex-col sm:flex-row gap-2.5">
+          <button id="btn-download" class="btn-brutal flex-1 bg-neon-yellow hover:bg-yellow-300 text-black font-display font-black text-sm sm:text-base py-3 px-4 rounded-xl border-2 border-black shadow-neo flex items-center justify-center gap-2">
+            <span>💾</span>
+            <span>DOWNLOAD PHOTO STRIP (PNG)</span>
+          </button>
+          <button id="btn-share" class="btn-brutal bg-dark-card hover:bg-zinc-800 text-white border-2 border-black py-3 px-4 rounded-xl text-xs font-bold font-mono flex items-center justify-center gap-1.5" title="Copy Image to Clipboard">
+            <span>📋</span> Salin
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ================= LANDING / MODE SELECTION MODAL ================= -->
+  <div id="modal-mode-select" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-opacity duration-300">
+    <div class="bg-dark-card border-3 border-black rounded-2xl p-5 sm:p-7 max-w-2xl w-full shadow-neo-pink relative">
+      
+      <!-- Close Button (if already has mode) -->
+      <button id="btn-close-modal" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-zinc-800 hover:bg-zinc-700 text-white font-black text-sm flex items-center justify-center border border-black">
+        ✕
+      </button>
+
+      <!-- Modal Header -->
+      <div class="text-center mb-6">
+        <div class="inline-block bg-neon-yellow text-black font-display font-black text-xs px-3 py-1 rounded-full border border-black uppercase mb-2 shadow-neo-sm">
+          ✦ SELECT YOUR PHOTOBOOTH EXPERIENCE ✦
+        </div>
+        <h2 class="font-display font-black text-2xl sm:text-3xl text-white tracking-tight">
+          PILIH MODE FOTO KAMU
+        </h2>
+        <p class="text-xs sm:text-sm text-zinc-400 font-mono mt-1">
+          Aesthetic Blok M vibes dengan dukungan Virtual Companion AI
+        </p>
+      </div>
+
+      <!-- 3 Mode Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        
+        <!-- Mode 1: Classic Photobooth -->
+        <div class="mode-card cursor-pointer bg-zinc-900 hover:bg-zinc-800/90 border-2 border-black hover:border-neon-pink p-4 rounded-xl flex flex-col justify-between transition-all group hover:-translate-y-1 shadow-neo" data-select-mode="classic">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-neon-pink/20 border-2 border-neon-pink flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition-transform">
+              🎞️
+            </div>
+            <div class="bg-neon-pink text-white text-[10px] font-bold px-2 py-0.5 rounded w-max mb-1 uppercase font-display">
+              Mode 1
+            </div>
+            <h3 class="font-display font-bold text-base text-white group-hover:text-neon-pink transition-colors">
+              Classic Photobooth
+            </h3>
+            <p class="text-xs text-zinc-400 font-mono mt-1.5 leading-relaxed">
+              Bareng teman atau solo. Pilihan bingkai otentik Blok M, filter 35mm film, dan stiker lucu.
+            </p>
+          </div>
+          <button class="btn-brutal mt-4 w-full bg-black text-white group-hover:bg-neon-pink py-2 rounded-lg text-xs font-bold border border-black transition-colors">
+            Pilih Mode Ini ➔
+          </button>
+        </div>
+
+        <!-- Mode 2: Virtual Frame (Artis / Idol) -->
+        <div class="mode-card cursor-pointer bg-zinc-900 hover:bg-zinc-800/90 border-2 border-black hover:border-cyber-cyan p-4 rounded-xl flex flex-col justify-between transition-all group hover:-translate-y-1 shadow-neo" data-select-mode="celebrity">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-cyber-cyan/20 border-2 border-cyber-cyan flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition-transform">
+              🎤
+            </div>
+            <div class="bg-cyber-cyan text-black text-[10px] font-bold px-2 py-0.5 rounded w-max mb-1 uppercase font-display">
+              Mode 2
+            </div>
+            <h3 class="font-display font-bold text-base text-white group-hover:text-cyber-cyan transition-colors">
+              Virtual Idol & Artis
+            </h3>
+            <p class="text-xs text-zinc-400 font-mono mt-1.5 leading-relaxed">
+              Foto bareng idol K-Pop, aktor, atau musisi indie kesayangan dengan live overlay transparan di kamera!
+            </p>
+          </div>
+          <button class="btn-brutal mt-4 w-full bg-black text-white group-hover:bg-cyber-cyan group-hover:text-black py-2 rounded-lg text-xs font-bold border border-black transition-colors">
+            Pilih Mode Ini ➔
+          </button>
+        </div>
+
+        <!-- Mode 3: Anime & Cartoon -->
+        <div class="mode-card cursor-pointer bg-zinc-900 hover:bg-zinc-800/90 border-2 border-black hover:border-neon-yellow p-4 rounded-xl flex flex-col justify-between transition-all group hover:-translate-y-1 shadow-neo" data-select-mode="anime">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-neon-yellow/20 border-2 border-neon-yellow flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition-transform">
+              🌸
+            </div>
+            <div class="bg-neon-yellow text-black text-[10px] font-bold px-2 py-0.5 rounded w-max mb-1 uppercase font-display">
+              Mode 3
+            </div>
+            <h3 class="font-display font-bold text-base text-white group-hover:text-neon-yellow transition-colors">
+              Anime & Cartoon
+            </h3>
+            <p class="text-xs text-zinc-400 font-mono mt-1.5 leading-relaxed">
+              Karakter anime lucu, cyber mecha, atau maskot kucing Blok M berpose di samping bahu kamu.
+            </p>
+          </div>
+          <button class="btn-brutal mt-4 w-full bg-black text-white group-hover:bg-neon-yellow group-hover:text-black py-2 rounded-lg text-xs font-bold border border-black transition-colors">
+            Pilih Mode Ini ➔
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Footer Note -->
+      <div class="mt-6 text-center text-[11px] text-zinc-500 font-mono">
+        💡 Kamu bisa mengganti mode kapan saja lewat tombol "Ganti Mode" di navigasi atas.
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification System -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- Hidden Offscreen Canvas for Ultra High-Res Export -->
+  <canvas id="export-canvas" class="hidden"></canvas>
+
+  <!-- ================= JAVASCRIPT APPLICATION LOGIC ================= -->
+  <script>
+    /*
+      VIBES.BOOTH - Gen Z Digital Photobooth
+      Single-File Application Architecture
+      Native WebRTC + Canvas + Web Audio API
+    */
+
+    // --- 1. APPLICATION STATE ---
+    const APP_STATE = {
+      mode: 'classic', // 'classic', 'celebrity', 'anime'
+      cameraStream: null,
+      facingMode: 'user', // 'user' or 'environment'
+      isMirrored: true,
+      soundEnabled: true,
+      activeFilter: 'normal',
+      activeLayout: 'strip', // 'strip', 'grid', 'single', 'newspaper'
+      frameColor: '#12141c',
+      frameMotif: 'solid', // 'solid', 'checker', 'filmstrip', 'hearts', 'blokm', 'cyber'
+      cornerRadius: 12,
+      watermarkText: 'BLOK M VIBES ✦ 2026',
+      showDateStamp: true,
+      customCaption: 'besties date in blok m 🖤',
+      
+      // Companion state (Draggable freely anywhere on screen)
+      activeCompanionId: null,
+      companionPosition: 'right', // 'left', 'center', 'right', 'custom'
+      companionX: 75, // percentage 0-100 across screen
+      companionY: 65, // percentage 0-100 across screen
+      companionScale: 1.0,
+      companionFlipped: false,
+
+      // Newspaper Layout Presets ('braga', 'blokm', 'malioboro')
+      newspaperLocation: 'braga',
+      
+      // Capture session state
+      isCapturing: false,
+      capturedPhotos: [], // Array of Image objects or DataURLs (up to 4)
+      totalShotsNeeded: 4, // 4 for strip/grid, 1 for single, 2 for newspaper
+      
+      // Interactive Stickers on Canvas
+      stickers: [], // Array of { id, svg, x, y, size, rotation }
+      selectedStickerId: null,
+      
+      // Demo photo fallback flag
+      isUsingDemo: false
+    };
+
+    // --- 1.1 NEWSPAPER PRESETS DATA (Braga, Blok M, Malioboro) ---
+    const NEWSPAPER_PRESETS = {
+      braga: {
+        location: 'BRAGA',
+        citySubtitle: 'BANDUNG • PARIS VAN JAVA',
+        volDate: 'VOL. XII NO. 42 • SPECIAL SUNDAY EDITION',
+        weather: 'BANDUNG: 22°C MISTY RAIN',
+        mainHeadline: 'BRAGA STREET: THE LIVING ARCHIVE OF ELEGANCE AND ART',
+        leadText: 'THE HISTORIC PROMENADE AWAKENS UNDER WARM TWILIGHT AS ART DECO ARCHITECTURE TESTIFIES TO CENTURIES OF CULTURE, ROMANCE, AND UNRIVALED CREATIVE SPIRIT.',
+        column1: 'Strolling through Jalan Braga has always been more than an evening walk—it is a journey through living memory. Established in the late nineteenth century, the cobbled avenue once welcomed dignitaries and artists seeking the Paris van Java atmosphere. Today, youthful laughter mingles with the aroma of freshly roasted robusta beans drifting from vintage cafe arches.',
+        column2: 'Modern youth gather along the timeless brick pathways, clutching analog cameras to immortalize memories in this sacred strip of Bandung. As the neon streetlights illuminate vintage balconies, Braga remains the beating cultural heart where timeless aesthetics and contemporary spirits intertwine in perfect harmony.',
+        sideHeadline: 'CAFÉ CHRONICLES',
+        sideText: 'Whispers of jazz and warm aromas echo through antique wooden doors as evening falls across the storied stone pavement.',
+        footerHeadline: '✦ SNAPMANNER PRESS ARCHIVE ✦ BANDUNG HERITAGE REGISTER // ISSUE 1928-2026'
+      },
+      blokm: {
+        location: 'BLOK M',
+        citySubtitle: 'JAKARTA SELATAN • CAPITAL VIBES',
+        volDate: 'VOL. VIII NO. 19 • WEEKEND CHRONICLE',
+        weather: 'JAKARTA: 28°C BREEZY NIGHT',
+        mainHeadline: 'BLOK M CROSSING: THE BEAT OF URBAN YOUTH & INDIE CULTURE',
+        leadText: 'FROM LEGENDARY MELAWAI STREETS TO CREATIVE INDIE HUBS, SOUTH JAKARTA REAFFIRMS ITS SOUL AS THE ULTIMATE EPICENTER OF YOUTH EXPRESSION.',
+        column1: 'For decades, Blok M has reigned supreme as the vibrant sanctuary of Jakarta culture. Generation after generation flock to its bustling alleyways, vinyl record basements, and buzzing coffee corners. Here, trends are born not by corporate decrees, but by spontaneous street encounters and genuine artistic fellowship.',
+        column2: 'As the evening MRT glides high above the avenues, young creatives capture candid snapshots against nostalgic concrete walls. From savory street culinary icons to subterranean thrifting troves, Blok M preserves Jakarta’s most resilient, electrifying youth spirit with unyielding vintage charisma.',
+        sideHeadline: 'CITY MEMORIES',
+        sideText: 'Underneath the flyover, timeless stories intertwine with morning iced coffee and vintage camera rolls.',
+        footerHeadline: '✦ SNAPMANNER PRESS ARCHIVE ✦ BLOK M DISTRICT // RECORDED FOR POSTERITY'
+      },
+      malioboro: {
+        location: 'MALIOBORO',
+        citySubtitle: 'YOGYAKARTA • HEART OF CULTURE',
+        volDate: 'VOL. XV NO. 88 • HERITAGE GAZETTE',
+        weather: 'YOGYAKARTA: 25°C STARRY NIGHT',
+        mainHeadline: 'MALIOBORO NOCTURNE: THE SOUL OF HERITAGE & TIMELESS NIGHTS',
+        leadText: 'UNDER ICONIC CAST-IRON LANTERNS, THE HISTORIC BOULEVARD OF JOGJA EMBRACES DREAMERS, TRAVELERS, AND POETS IN ITS WARM GOLDEN GLOW.',
+        column1: 'Few avenues on earth command the poetic reverence of Malioboro. Stretching gracefully from the royal railway depot toward the ancient Kraton gates, the avenue pulses with gentle humanity. The rhythmic clip-clop of andong horse carriages harmonizes seamlessly with traditional street acoustic melodies.',
+        column2: 'Beneath the shady canopy of tamarind trees and glowing streetlamps, companions pause at roadside angkringan to savor steaming ginger tea. Every cobblestone holds a million stories of youthful promises, fond farewells, and everlasting memories that time itself cannot wash away.',
+        sideHeadline: 'ANGKRINGAN TALES',
+        sideText: 'Charcoal embers glow brightly as wanderers share stories over sweet hot tea until the first morning birds take flight.',
+        footerHeadline: '✦ SNAPMANNER PRESS ARCHIVE ✦ SULTANATE CHRONICLES // PRESERVED IN TIME'
+      }
+    };
+
+    // --- 2. VECTOR ASSETS (High Quality SVGs for Companions & Stickers) ---
+    // Defined as clean data URIs to guarantee ZERO CORS security taint during canvas export!
+    
+    // Celebrity / Idol Companions
+    const COMPANION_DATA = {
+      celebrity: [
+        {
+          id: 'kpop_boy',
+          title: 'K-Pop Idol (Chic)',
+          badge: 'Boyband',
+          svg: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 480" fill="none">
+            <g transform="translate(10, 20)">
+              <!-- Jacket/Torso -->
+              <path d="M70,420 C70,300 90,260 150,260 C210,260 230,300 230,420 Z" fill="%231a1a24" stroke="%23ff2a85" stroke-width="4"/>
+              <path d="M125,260 L150,330 L175,260 Z" fill="%23ffffff"/>
+              <!-- Neck -->
+              <rect x="135" y="210" width="30" height="60" fill="%23f9d5bb"/>
+              <!-- Head/Face -->
+              <ellipse cx="150" cy="180" rx="45" ry="55" fill="%23ffdfc4"/>
+              <!-- K-pop Layered Hair (Silver/Lilac) -->
+              <path d="M95,175 C90,110 120,80 150,80 C185,80 215,110 210,175 C200,140 185,120 150,120 C115,120 100,140 95,175 Z" fill="%23c4b5fd" stroke="%238b5cf6" stroke-width="2"/>
+              <!-- Eyes with cool sunglasses/wink -->
+              <rect x="115" y="165" width="28" height="14" rx="4" fill="%23111" stroke="%2300f0ff" stroke-width="2"/>
+              <rect x="157" y="165" width="28" height="14" rx="4" fill="%23111" stroke="%2300f0ff" stroke-width="2"/>
+              <line x1="143" y1="172" x2="157" y2="172" stroke="%2300f0ff" stroke-width="2"/>
+              <!-- Smile -->
+              <path d="M142,205 Q150,212 158,205" stroke="%23e11d48" stroke-width="3" stroke-linecap="round"/>
+              <!-- Hand making Korean Cheek Heart -->
+              <circle cx="85" cy="200" r="16" fill="%23ffdfc4" stroke="%23ff2a85" stroke-width="2"/>
+              <path d="M78,190 C78,185 85,183 85,188 C85,183 92,185 92,190 C92,196 85,200 85,200 C85,200 78,196 78,190 Z" fill="%23ff2a85"/>
+              <!-- Stage mic -->
+              <line x1="150" y1="215" x2="175" y2="230" stroke="%23000" stroke-width="3"/>
+              <circle cx="178" cy="232" r="4" fill="%23ff2a85"/>
+              <!-- Sparkles -->
+              <polygon points="215,120 220,130 230,135 220,140 215,150 210,140 200,135 210,130" fill="%23ffe600"/>
+            </g>
+          </svg>`
+        },
+        {
+          id: 'kpop_girl',
+          title: 'K-Pop Idol (Beret)',
+          badge: 'Girlgroup',
+          svg: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 480" fill="none">
+            <g transform="translate(10, 20)">
+              <!-- Outfit / Ribbon -->
+              <path d="M70,420 C70,310 90,270 150,270 C210,270 230,310 230,420 Z" fill="%23fce7f3" stroke="%23ff2a85" stroke-width="4"/>
+              <!-- Cute Ribbon Bow -->
+              <polygon points="150,285 135,275 135,295" fill="%23ff2a85"/>
+              <polygon points="150,285 165,275 165,295" fill="%23ff2a85"/>
+              <circle cx="150" cy="285" r="4" fill="%23fff"/>
+              <!-- Neck -->
+              <rect x="138" y="225" width="24" height="50" fill="%23fcd5ce"/>
+              <!-- Face -->
+              <ellipse cx="150" cy="190" rx="42" ry="50" fill="%23ffdfd3"/>
+              <!-- Long wavy hair -->
+              <path d="M90,200 C75,270 75,340 85,380 C100,380 105,290 105,240 Z" fill="%23451a03"/>
+              <path d="M210,200 C225,270 225,340 215,380 C200,380 195,290 195,240 Z" fill="%23451a03"/>
+              <!-- Cute Y2K Beret -->
+              <ellipse cx="145" cy="135" rx="65" ry="32" fill="%23ff2a85" stroke="%23000" stroke-width="3" transform="rotate(-10 145 135)"/>
+              <circle cx="145" cy="105" r="5" fill="%23ffe600"/>
+              <!-- Eyes with glitter -->
+              <ellipse cx="132" cy="185" rx="5" ry="6" fill="%231e1b4b"/>
+              <circle cx="134" cy="183" r="2" fill="%23fff"/>
+              <ellipse cx="168" cy="185" rx="5" ry="6" fill="%231e1b4b"/>
+              <circle cx="170" cy="183" r="2" fill="%23fff"/>
+              <!-- Blush -->
+              <ellipse cx="125" cy="195" rx="8" ry="4" fill="%23ff8da1" opacity="0.6"/>
+              <ellipse cx="175" cy="195" rx="8" ry="4" fill="%23ff8da1" opacity="0.6"/>
+              <!-- Lip gloss smile -->
+              <path d="M144,208 Q150,214 156,208" stroke="%23e11d48" stroke-width="3" stroke-linecap="round"/>
+              <!-- Peace sign hand V -->
+              <circle cx="225" cy="220" r="14" fill="%23ffdfd3" stroke="%23ff2a85" stroke-width="2"/>
+              <rect x="215" y="195" width="6" height="22" rx="3" fill="%23ffdfd3" stroke="%23ff2a85" stroke-width="1.5" transform="rotate(-15 215 195)"/>
+              <rect x="228" y="195" width="6" height="22" rx="3" fill="%23ffdfd3" stroke="%23ff2a85" stroke-width="1.5" transform="rotate(15 228 195)"/>
+            </g>
+          </svg>`
+        },
+        {
+          id: 'indie_musician',
+          title: 'Indie Musician (Blok M)',
+          badge: 'Indie Vibe',
+          svg: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 480" fill="none">
+            <g transform="translate(10, 20)">
+              <!-- Vintage Leather Jacket -->
+              <path d="M60,420 C60,300 80,260 150,260 C220,260 240,300 240,420 Z" fill="%2327272a" stroke="%23ffe600" stroke-width="3"/>
+              <!-- Striped shirt inside -->
+              <rect x="130" y="260" width="40" height="90" fill="%23ffffff"/>
+              <line x1="130" y1="280" x2="170" y2="280" stroke="%23e11d48" stroke-width="4"/>
+              <line x1="130" y1="310" x2="170" y2="310" stroke="%23e11d48" stroke-width="4"/>
+              <!-- Face -->
+              <ellipse cx="150" cy="180" rx="42" ry="52" fill="%23e5b38b"/>
+              <!-- Mullet hair -->
+              <path d="M98,180 C95,90 130,85 150,85 C175,85 205,90 202,180 C190,120 110,120 98,180 Z" fill="%2318181b"/>
+              <!-- Sunglasses -->
+              <rect x="120" y="165" width="26" height="16" rx="4" fill="%2309090b" stroke="%23ffe600" stroke-width="2"/>
+              <rect x="154" y="165" width="26" height="16" rx="4" fill="%2309090b" stroke="%23ffe600" stroke-width="2"/>
+              <line x1="146" y1="172" x2="154" y2="172" stroke="%23ffe600" stroke-width="2"/>
+              <!-- Electric Guitar Neck Over Shoulder -->
+              <rect x="40" y="160" width="22" height="260" fill="%23d97706" stroke="%23000" stroke-width="3" transform="rotate(-25 40 160)"/>
+              <circle cx="55" cy="150" r="14" fill="%23b91c1c" stroke="%23000" stroke-width="2"/>
+            </g>
+          </svg>`
+        },
+        {
+          id: 'kdrama_actor',
+          title: 'K-Drama Actor',
+          badge: 'Oppa Vibe',
+          svg: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 480" fill="none">
+            <g transform="translate(10, 20)">
+              <!-- Chic Trench Coat -->
+              <path d="M65,420 C65,300 85,250 150,250 C215,250 235,300 235,420 Z" fill="%2378350f" stroke="%23000" stroke-width="4"/>
+              <path d="M125,250 L150,340 L175,250 Z" fill="%23000"/>
+              <!-- Face -->
+              <ellipse cx="150" cy="175" rx="40" ry="50" fill="%23fcd5ce"/>
+              <!-- Comma Hair Style -->
+              <path d="M102,170 C98,100 130,90 150,90 C180,90 200,105 198,170 C190,135 170,120 150,120 C130,120 115,135 102,170 Z" fill="%23262626"/>
+              <!-- Soft eyes -->
+              <path d="M125,170 Q133,165 140,170" stroke="%231c1917" stroke-width="3" stroke-linecap="round"/>
+              <path d="M160,170 Q167,165 175,170" stroke="%231c1917" stroke-width="3" stroke-linecap="round"/>
+              <!-- Warm gentle smile -->
+              <path d="M142,198 Q150,205 158,198" stroke="%23b91c1c" stroke-width="3" stroke-linecap="round"/>
+              <!-- Holding Coffee Cup -->
+              <rect x="75" y="270" width="30" height="45" rx="5" fill="%23fef08a" stroke="%23000" stroke-width="3"/>
+              <line x1="75" y1="285" x2="105" y2="285" stroke="%23000" stroke-width="3"/>
+              <text x="80" y="300" font-size="8" font-weight="bold" fill="%23000" font-family="monospace">CAFE</text>
+            </g>
+          </svg>`
+        }
+      ],
+      anime: [
+        {
+          id: 'anime_neko',
+          title: 'Neko Anime Girl',
+          badge: 'Kawaii',
+          svg: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 480" fill="none">
+            <g transform="translate(10, 20)">
+              <!-- Sailor Uniform Torso -->
+              <path d="M70,420 C70,310 90,270 150,270 C210,270 230,310 230,420 Z" fill="%231e3a8a" stroke="%2300f0ff" stroke-width="3"/>
+              <polygon points="150,270 130,320 170,320" fill="%23ef4444"/>
+              <!-- Face -->
+              <ellipse cx="150" cy="190" rx="45" ry="48" fill="%23ffe4e6"/>
+              <!-- Big Anime Eyes -->
+              <ellipse cx="130" cy="185" rx="9" ry="12" fill="%230284c7"/>
+              <circle cx="132" cy="180" r="4" fill="%23fff"/>
+              <circle cx="128" cy="190" r="2" fill="%23fff"/>
+              <ellipse cx="170" cy="185" rx="9" ry="12" fill="%230284c7"/>
+              <circle cx="172" cy="180" r="4" fill="%23fff"/>
+              <circle cx="168" cy="190" r="2" fill="%23fff"/>
+              <!-- Blush Lines -->
+              <line x1="116" y1="196" x2="124" y2="192" stroke="%23f43f5e" stroke-width="2"/>
+              <line x1="176" y1="192" x2="184" y2="196" stroke="%23f43f5e" stroke-width="2"/>
+              <!-- Cat Mouth :3 -->
+              <path d="M142,206 Q146,212 150,206 Q154,212 158,206" stroke="%23000" stroke-width="2.5" fill="none"/>
+              <!-- Pink Twintails Hair -->
+              <path d="M95,190 C80,260 70,350 80,410 C100,410 110,310 110,240 Z" fill="%23f472b6"/>
+              <path d="M205,190 C220,260 230,350 220,410 C200,410 190,310 190,240 Z" fill="%23f472b6"/>
+              <!-- Bangs -->
+              <path d="M100,165 C115,130 185,130 200,165 C190,150 170,145 150,155 C130,145 110,150 100,165 Z" fill="%23f472b6"/>
+              <!-- Neko Cat Ears -->
+              <polygon points="105,150 90,100 130,125" fill="%23f472b6" stroke="%23000" stroke-width="3"/>
+              <polygon points="105,145 98,112 124,128" fill="%23fecdd3"/>
+              <polygon points="195,150 210,100 170,125" fill="%23f472b6" stroke="%23000" stroke-width="3"/>
+              <polygon points="195,145 202,112 176,128" fill="%23fecdd3"/>
+              <!-- Cat Paw Hand (Peace/Nyan) -->
+              <circle cx="215" cy="230" r="15" fill="%23ffe4e6" stroke="%23f472b6" stroke-width="3"/>
+              <circle cx="208" cy="222" r="3" fill="%23f43f5e"/>
+              <circle cx="215" cy="219" r="3" fill="%23f43f5e"/>
+              <circle cx="222" cy="222" r="3" fill="%23f43f5e"/>
+            </g>
+          </svg>`
+        },
+        {
+          id: 'anime_mecha',
+          title: 'Cyber Mecha Hero',
+          badge: 'Sci-Fi',
+          svg: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 480" fill="none">
+            <g transform="translate(10, 20)">
+              <!-- Futuristic Cyber Armor -->
+              <path d="M60,420 C60,290 85,250 150,250 C215,250 240,290 240,420 Z" fill="%230f172a" stroke="%2300f0ff" stroke-width="4"/>
+              <path d="M120,270 L150,330 L180,270 Z" fill="%23ffe600"/>
+              <!-- Head / Visor -->
+              <ellipse cx="150" cy="180" rx="42" ry="48" fill="%23cbd5e1"/>
+              <!-- Glowing Cyber Visor -->
+              <rect x="115" y="165" width="70" height="22" rx="6" fill="%23000" stroke="%2300f0ff" stroke-width="3"/>
+              <line x1="120" y1="176" x2="180" y2="176" stroke="%23ff2a85" stroke-width="4"/>
+              <!-- Spiky Anime Mecha Hair -->
+              <polygon points="100,160 80,110 115,130" fill="%2338bdf8"/>
+              <polygon points="120,135 125,75 145,115" fill="%2338bdf8"/>
+              <polygon points="150,115 165,70 175,125" fill="%2338bdf8"/>
+              <polygon points="180,135 210,105 195,160" fill="%2338bdf8"/>
+              <!-- Mecha Antennas -->
+              <line x1="90" y1="180" x2="70" y2="140" stroke="%23ffe600" stroke-width="4" stroke-linecap="round"/>
+              <line x1="210" y1="180" x2="230" y2="140" stroke="%23ffe600" stroke-width="4" stroke-linecap="round"/>
+            </g>
+          </svg>`
+        },
+        {
+          id: 'mascot_blokm',
+          title: 'Blok M Cool Cat',
+          badge: 'Mascot',
+          svg: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 480" fill="none">
+            <g transform="translate(10, 40)">
+              <!-- Chunky Cat Body -->
+              <ellipse cx="150" cy="300" rx="85" ry="95" fill="%23fb923c" stroke="%23000" stroke-width="5"/>
+              <!-- Cat Ears -->
+              <polygon points="85,190 70,120 125,160" fill="%23fb923c" stroke="%23000" stroke-width="5"/>
+              <polygon points="85,180 78,135 118,162" fill="%23ffedd5"/>
+              <polygon points="215,190 230,120 175,160" fill="%23fb923c" stroke="%23000" stroke-width="5"/>
+              <polygon points="215,180 222,135 182,162" fill="%23ffedd5"/>
+              <!-- Cat Face -->
+              <ellipse cx="150" cy="200" rx="70" ry="55" fill="%23fb923c" stroke="%23000" stroke-width="5"/>
+              <!-- Pixel Shades -->
+              <rect x="105" y="180" width="38" height="24" rx="2" fill="%23000" stroke="%23ffe600" stroke-width="2"/>
+              <rect x="157" y="180" width="38" height="24" rx="2" fill="%23000" stroke="%23ffe600" stroke-width="2"/>
+              <rect x="143" y="188" width="14" height="6" fill="%23000"/>
+              <!-- Cat Nose & Whisker -->
+              <polygon points="150,215 145,210 155,210" fill="%23f43f5e"/>
+              <line x1="85" y1="210" x2="60" y2="205" stroke="%23000" stroke-width="3"/>
+              <line x1="85" y1="220" x2="60" y2="225" stroke="%23000" stroke-width="3"/>
+              <line x1="215" y1="210" x2="240" y2="205" stroke="%23000" stroke-width="3"/>
+              <line x1="215" y1="220" x2="240" y2="225" stroke="%23000" stroke-width="3"/>
+              <!-- Boba Drink Cup in Paws -->
+              <rect x="135" y="270" width="30" height="42" rx="4" fill="%23fed7aa" stroke="%23000" stroke-width="3"/>
+              <line x1="150" y1="250" x2="150" y2="270" stroke="%23ff2a85" stroke-width="5" stroke-linecap="round"/>
+              <circle cx="142" cy="300" r="3" fill="%23451a03"/>
+              <circle cx="150" cy="302" r="3" fill="%23451a03"/>
+              <circle cx="158" cy="300" r="3" fill="%23451a03"/>
+              <text x="137" y="290" font-size="7" font-weight="900" fill="%23000" font-family="sans-serif">BLOK M</text>
+            </g>
+          </svg>`
+        }
+      ]
+    };
+
+    // Sticker Assets for Drag & Drop
+    const STICKER_LIBRARY = [
+      {
+        id: 'st_shades',
+        label: 'Shades',
+        svg: `<svg viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="8" width="38" height="24" rx="8" fill="#111" stroke="#00f0ff" stroke-width="3"/>
+          <rect x="57" y="8" width="38" height="24" rx="8" fill="#111" stroke="#00f0ff" stroke-width="3"/>
+          <line x1="43" y1="18" x2="57" y2="18" stroke="#00f0ff" stroke-width="4"/>
+          <path d="M12 12L24 26" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+          <path d="M64 12L76 26" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+        </svg>`
+      },
+      {
+        id: 'st_heart',
+        label: 'Y2K Heart',
+        svg: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M40 70C40 70 10 50 10 26C10 14 20 6 32 6C38 6 40 10 40 10C40 10 42 6 48 6C60 6 70 14 70 26C70 50 40 70 40 70Z" fill="#ff2a85" stroke="#000" stroke-width="4"/>
+          <circle cx="28" cy="20" r="4" fill="#fff"/>
+        </svg>`
+      },
+      {
+        id: 'st_sparkle',
+        label: 'Sparkles',
+        svg: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="40,5 48,32 75,40 48,48 40,75 32,48 5,40 32,32" fill="#ffe600" stroke="#000" stroke-width="3"/>
+          <polygon points="65,15 68,22 75,25 68,28 65,35 62,28 55,25 62,22" fill="#00f0ff"/>
+        </svg>`
+      },
+      {
+        id: 'st_cherry',
+        label: 'Cherry',
+        svg: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="28" cy="54" r="18" fill="#e11d48" stroke="#000" stroke-width="4"/>
+          <circle cx="22" cy="48" r="4" fill="#fff"/>
+          <circle cx="56" cy="58" r="16" fill="#e11d48" stroke="#000" stroke-width="4"/>
+          <circle cx="52" cy="52" r="3.5" fill="#fff"/>
+          <path d="M28 36 C35 15 45 10 52 14" stroke="#15803d" stroke-width="4" stroke-linecap="round" fill="none"/>
+          <path d="M56 42 C50 25 48 15 52 14" stroke="#15803d" stroke-width="4" stroke-linecap="round" fill="none"/>
+          <ellipse cx="62" cy="18" rx="8" ry="4" fill="#22c55e" stroke="#000" stroke-width="2" transform="rotate(-20 62 18)"/>
+        </svg>`
+      },
+      {
+        id: 'st_bow',
+        label: 'Bow Ribbon',
+        svg: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="40,40 15,20 15,60" fill="#f472b6" stroke="#000" stroke-width="3"/>
+          <polygon points="40,40 65,20 65,60" fill="#f472b6" stroke="#000" stroke-width="3"/>
+          <circle cx="40" cy="40" r="9" fill="#ff2a85" stroke="#000" stroke-width="3"/>
+          <path d="M35 48 L22 72" stroke="#f472b6" stroke-width="5" stroke-linecap="round"/>
+          <path d="M45 48 L58 72" stroke="#f472b6" stroke-width="5" stroke-linecap="round"/>
+        </svg>`
+      },
+      {
+        id: 'st_vibe_check',
+        label: 'Vibe Check',
+        svg: `<svg viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g transform="rotate(-5 60 20)">
+            <rect x="5" y="5" width="110" height="30" rx="4" fill="#ffe600" stroke="#000" stroke-width="3"/>
+            <text x="14" y="25" font-family="'Space Grotesk', sans-serif" font-weight="900" font-size="14" fill="#000">✦ VIBE CHECK</text>
+          </g>
+        </svg>`
+      },
+      {
+        id: 'st_hot_girl',
+        label: 'Hot Girl',
+        svg: `<svg viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g transform="rotate(4 60 20)">
+            <rect x="5" y="5" width="110" height="30" rx="4" fill="#ff2a85" stroke="#000" stroke-width="3"/>
+            <text x="15" y="25" font-family="'Space Grotesk', sans-serif" font-weight="900" font-size="14" fill="#fff">HOT GIRL 💖</text>
+          </g>
+        </svg>`
+      },
+      {
+        id: 'st_star',
+        label: 'Cyber Star',
+        svg: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="40,5 50,30 75,40 50,50 40,75 30,50 5,40 30,30" fill="#00f0ff" stroke="#000" stroke-width="3"/>
+          <circle cx="40" cy="40" r="6" fill="#fff"/>
+        </svg>`
+      },
+      {
+        id: 'st_8bit',
+        label: '8-Bit Alien',
+        svg: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="25" y="15" width="30" height="10" fill="#a855f7"/>
+          <rect x="15" y="25" width="50" height="25" fill="#a855f7"/>
+          <rect x="20" y="30" width="8" height="8" fill="#fff"/>
+          <rect x="52" y="30" width="8" height="8" fill="#fff"/>
+          <rect x="10" y="35" width="10" height="25" fill="#a855f7"/>
+          <rect x="60" y="35" width="10" height="25" fill="#a855f7"/>
+          <rect x="25" y="50" width="10" height="15" fill="#a855f7"/>
+          <rect x="45" y="50" width="10" height="15" fill="#a855f7"/>
+        </svg>`
+      },
+      {
+        id: 'st_sakura',
+        label: 'Sakura',
+        svg: `<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="22" r="14" fill="#fbcfe8" stroke="#000" stroke-width="2"/>
+          <circle cx="58" cy="35" r="14" fill="#fbcfe8" stroke="#000" stroke-width="2"/>
+          <circle cx="51" cy="58" r="14" fill="#fbcfe8" stroke="#000" stroke-width="2"/>
+          <circle cx="29" cy="58" r="14" fill="#fbcfe8" stroke="#000" stroke-width="2"/>
+          <circle cx="22" cy="35" r="14" fill="#fbcfe8" stroke="#000" stroke-width="2"/>
+          <circle cx="40" cy="40" r="7" fill="#f43f5e"/>
+        </svg>`
+      }
+    ];
+
+    // --- 3. WEB AUDIO API SYNTHESIZER (No External MP3/WAV Dependencies) ---
+    class SoundEngine {
+      constructor() {
+        this.ctx = null;
+      }
+
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) {
+            this.ctx = new AudioContext();
+          }
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      }
+
+      // Beep for countdown (3, 2, 1)
+      playCountdownBeep(frequency = 520) {
+        if (!APP_STATE.soundEnabled) return;
+        this.init();
+        if (!this.ctx) return;
+
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(frequency, this.ctx.currentTime);
+
+        gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.18);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.2);
+      }
+
+      // High pitch beep for "CHEESE!"
+      playCheeseSound() {
+        if (!APP_STATE.soundEnabled) return;
+        this.init();
+        if (!this.ctx) return;
+
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(880, this.ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(1200, this.ctx.currentTime + 0.15);
+
+        gain.gain.setValueAtTime(0.4, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.25);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.26);
+      }
+
+      // Camera Shutter mechanical snap sound
+      playShutterClick() {
+        if (!APP_STATE.soundEnabled) return;
+        this.init();
+        if (!this.ctx) return;
+
+        // 1. Noise burst for mechanical shutter
+        const bufferSize = this.ctx.sampleRate * 0.08;
+        const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+        const output = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          output[i] = Math.random() * 2 - 1;
+        }
+
+        const whiteNoise = this.ctx.createBufferSource();
+        whiteNoise.buffer = buffer;
+
+        const filter = this.ctx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.value = 1400;
+
+        const noiseGain = this.ctx.createGain();
+        noiseGain.gain.setValueAtTime(0.8, this.ctx.currentTime);
+        noiseGain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.07);
+
+        whiteNoise.connect(filter);
+        filter.connect(noiseGain);
+        noiseGain.connect(this.ctx.destination);
+
+        // 2. Click thud
+        const osc = this.ctx.createOscillator();
+        const oscGain = this.ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(180, this.ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(40, this.ctx.currentTime + 0.06);
+
+        oscGain.gain.setValueAtTime(0.7, this.ctx.currentTime);
+        oscGain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.07);
+
+        osc.connect(oscGain);
+        oscGain.connect(this.ctx.destination);
+
+        whiteNoise.start();
+        osc.start();
+        whiteNoise.stop(this.ctx.currentTime + 0.08);
+        osc.stop(this.ctx.currentTime + 0.08);
+      }
+
+      // Cute pop sound for sticker interaction
+      playStickerPop() {
+        if (!APP_STATE.soundEnabled) return;
+        this.init();
+        if (!this.ctx) return;
+
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(320, this.ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(740, this.ctx.currentTime + 0.08);
+
+        gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.09);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.1);
+      }
+    }
+
+    const sound = new SoundEngine();
+
+    // --- 4. CAMERA ENGINE (WebRTC MediaDevices) ---
+    const videoElem = document.getElementById('camera-video');
+    const demoImageElem = document.getElementById('demo-image');
+    const fallbackBanner = document.getElementById('camera-fallback-banner');
+
+    async function initCamera() {
+      APP_STATE.isUsingDemo = false;
+      demoImageElem.classList.add('hidden');
+      videoElem.classList.remove('hidden');
+
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        showFallbackBanner();
+        showToast('Kamera tidak didukung pada browser ini, beralih ke mode demo.', 'warn');
+        loadDemoSelfie();
+        return;
+      }
+
+      // Stop existing stream if any
+      if (APP_STATE.cameraStream) {
+        APP_STATE.cameraStream.getTracks().forEach(track => track.stop());
+        APP_STATE.cameraStream = null;
+      }
+
+      const constraints = {
+        video: {
+          facingMode: APP_STATE.facingMode,
+          width: { ideal: 1280 },
+          height: { ideal: 960 }
+        },
+        audio: false
+      };
+
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia(constraints);
+        APP_STATE.cameraStream = stream;
+        videoElem.srcObject = stream;
+        await videoElem.play();
+        fallbackBanner.classList.add('hidden');
+
+        // Update resolution badge
+        const track = stream.getVideoTracks()[0];
+        const settings = track.getSettings();
+        document.getElementById('cam-resolution-badge').textContent = 
+          `${settings.width || 1280}x${settings.height || 720}`;
+        
+        showToast('Kamera terhubung! Siap berfoto ✨', 'success');
+      } catch (err) {
+        console.warn('Camera error or permission denied:', err);
+        showFallbackBanner();
+        loadDemoSelfie();
+      }
+    }
+
+    function showFallbackBanner() {
+      fallbackBanner.classList.remove('hidden');
+    }
+
+    // Built-in Demo Selfie generator (Aesthetic SVG Canvas so user can test without webcam)
+    function loadDemoSelfie() {
+      APP_STATE.isUsingDemo = true;
+      fallbackBanner.classList.add('hidden');
+      videoElem.classList.add('hidden');
+      demoImageElem.classList.remove('hidden');
+
+      // Create an aesthetic Y2K Selfie SVG data-uri
+      const demoSvg = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="640" height="480">
+        <defs>
+          <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="%23181824"/>
+            <stop offset="50%" stop-color="%232e1065"/>
+            <stop offset="100%" stop-color="%23ff2a85"/>
+          </linearGradient>
+        </defs>
+        <rect width="100%" height="100%" fill="url(%23bg)"/>
+        <!-- Background Neon Wall Lights -->
+        <circle cx="140" cy="120" r="60" fill="%2300f0ff" opacity="0.3" filter="blur(20px)"/>
+        <circle cx="500" cy="180" r="80" fill="%23ff2a85" opacity="0.35" filter="blur(25px)"/>
+        <!-- Person Torso -->
+        <path d="M180,480 C180,360 220,320 320,320 C420,320 460,360 460,480 Z" fill="%23111827" stroke="%23ff2a85" stroke-width="4"/>
+        <rect x="290" y="270" width="60" height="70" fill="%23fcd5ce"/>
+        <!-- Face -->
+        <ellipse cx="320" cy="220" rx="65" ry="75" fill="%23fcd5ce"/>
+        <!-- Modern Haircut -->
+        <path d="M245,210 C240,110 280,95 320,95 C365,95 400,110 395,210 C380,150 350,140 320,140 C290,140 260,150 245,210 Z" fill="%231c1917"/>
+        <!-- Trendy Sunglasses -->
+        <rect x="265" y="195" width="45" height="26" rx="6" fill="%23000" stroke="%23ffe600" stroke-width="3"/>
+        <rect x="330" y="195" width="45" height="26" rx="6" fill="%23000" stroke="%23ffe600" stroke-width="3"/>
+        <line x1="310" y1="208" x2="330" y2="208" stroke="%23ffe600" stroke-width="3"/>
+        <!-- Smile -->
+        <path d="M305,248 Q320,260 335,248" stroke="%23b91c1c" stroke-width="4" stroke-linecap="round"/>
+        <!-- V-Sign Hand -->
+        <circle cx="210" cy="270" r="22" fill="%23fcd5ce" stroke="%23ff2a85" stroke-width="3"/>
+        <rect x="195" y="225" width="10" height="35" rx="5" fill="%23fcd5ce" stroke="%23ff2a85" stroke-width="2" transform="rotate(-15 195 225)"/>
+        <rect x="215" y="225" width="10" height="35" rx="5" fill="%23fcd5ce" stroke="%23ff2a85" stroke-width="2" transform="rotate(15 215 225)"/>
+        <!-- Blok M Badge Stamp -->
+        <rect x="20" y="20" width="170" height="36" rx="6" fill="%23ffe600" stroke="%23000" stroke-width="3"/>
+        <text x="32" y="44" font-family="'Space Grotesk', sans-serif" font-weight="900" font-size="14" fill="%23000">✦ DEMO SELFIE 2026</text>
+      </svg>`;
+
+      demoImageElem.src = demoSvg;
+      document.getElementById('cam-resolution-badge').textContent = 'Demo Mode (640x480)';
+      showToast('Mode Demo Selfie Aktif! Kamu bisa menguji semua filter & stiker.', 'info');
+    }
+
+    // --- 5. COMPANION SYSTEM (Artis & Anime Overlays) ---
+    const companionBox = document.getElementById('companion-controls-box');
+    const companionOverlay = document.getElementById('companion-overlay-container');
+    const companionImg = document.getElementById('companion-img');
+    const companionThumbnails = document.getElementById('companion-thumbnail-list');
+
+    function renderCompanionThumbnails() {
+      companionThumbnails.innerHTML = '';
+      const list = COMPANION_DATA[APP_STATE.mode] || [];
+
+      list.forEach((char, index) => {
+        const btn = document.createElement('button');
+        const isSelected = APP_STATE.activeCompanionId === char.id;
+        btn.className = `btn-brutal flex-shrink-0 flex items-center gap-2 p-2 rounded-xl border-2 transition-all ${
+          isSelected 
+            ? 'border-neon-pink bg-zinc-800 text-white' 
+            : 'border-zinc-800 bg-black/60 text-zinc-400 hover:text-white hover:border-zinc-600'
+        }`;
+        btn.innerHTML = `
+          <div class="w-10 h-10 rounded-lg bg-zinc-900 border border-zinc-700 overflow-hidden flex items-center justify-center p-0.5">
+            <img src="${char.svg}" alt="${char.title}" class="w-full h-full object-contain" />
+          </div>
+          <div class="text-left pr-2">
+            <div class="text-xs font-bold font-display">${char.title}</div>
+            <span class="text-[9px] font-mono uppercase bg-neon-pink/20 text-neon-pink px-1 rounded">${char.badge}</span>
+          </div>
+        `;
+        btn.onclick = () => selectCompanion(char.id);
+        companionThumbnails.appendChild(btn);
+      });
+    }
+
+    function selectCompanion(id) {
+      APP_STATE.activeCompanionId = id;
+      const list = COMPANION_DATA[APP_STATE.mode] || [];
+      const char = list.find(c => c.id === id);
+
+      if (char) {
+        companionImg.src = char.svg;
+        companionOverlay.classList.remove('hidden');
+        updateCompanionTransform();
+        renderCompanionThumbnails();
+        showToast(`Virtual companion "${char.title}" dipilih!`, 'info');
+      } else {
+        companionOverlay.classList.add('hidden');
+      }
+    }
+
+    function updateCompanionTransform() {
+      if (!APP_STATE.activeCompanionId) return;
+
+      // Free positioning via center percentages (X & Y)
+      companionOverlay.style.left = `${APP_STATE.companionX}%`;
+      companionOverlay.style.top = `${APP_STATE.companionY}%`;
+      companionOverlay.style.bottom = 'auto';
+      companionOverlay.style.right = 'auto';
+
+      const flip = APP_STATE.companionFlipped ? -1 : 1;
+      companionOverlay.style.transform = `translate(-50%, -50%) scale(${APP_STATE.companionScale * flip}, ${APP_STATE.companionScale})`;
+      companionOverlay.style.transformOrigin = 'center center';
+    }
+
+    // --- Interactive Drag & Drop Event Listeners for Companion Overlay (Mouse & Touch) ---
+    const cameraViewportBox = document.getElementById('camera-viewport-box');
+    let isDraggingCompanion = false;
+    let startCompPointerX = 0, startCompPointerY = 0;
+    let initialCompX = 75, initialCompY = 65;
+
+    companionOverlay.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      isDraggingCompanion = true;
+      companionOverlay.setPointerCapture(e.pointerId);
+
+      startCompPointerX = e.clientX;
+      startCompPointerY = e.clientY;
+      initialCompX = APP_STATE.companionX;
+      initialCompY = APP_STATE.companionY;
+      companionOverlay.classList.add('cursor-grabbing');
+    });
+
+    companionOverlay.addEventListener('pointermove', (e) => {
+      if (!isDraggingCompanion) return;
+      const rect = cameraViewportBox.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+
+      const deltaXPercent = ((e.clientX - startCompPointerX) / rect.width) * 100;
+      const deltaYPercent = ((e.clientY - startCompPointerY) / rect.height) * 100;
+
+      APP_STATE.companionX = Math.max(12, Math.min(88, initialCompX + deltaXPercent));
+      APP_STATE.companionY = Math.max(15, Math.min(85, initialCompY + deltaYPercent));
+
+      updateCompanionTransform();
+    });
+
+    const stopCompanionDrag = (e) => {
+      if (isDraggingCompanion) {
+        isDraggingCompanion = false;
+        companionOverlay.classList.remove('cursor-grabbing');
+      }
+    };
+    companionOverlay.addEventListener('pointerup', stopCompanionDrag);
+    companionOverlay.addEventListener('pointercancel', stopCompanionDrag);
+
+    // --- 6. FILTER & VISUAL EFFECTS SYSTEM ---
+    function setCameraFilter(filterName) {
+      APP_STATE.activeFilter = filterName;
+
+      // Reset filter classes
+      videoElem.className = videoElem.className.replace(/filter-\w+/g, '');
+      demoImageElem.className = demoImageElem.className.replace(/filter-\w+/g, '');
+
+      // Apply new filter class
+      videoElem.classList.add(`filter-${filterName}`);
+      demoImageElem.classList.add(`filter-${filterName}`);
+
+      // VHS Overlay
+      const vhsOverlay = document.getElementById('vhs-scanlines');
+      if (filterName === 'vhs') {
+        vhsOverlay.classList.remove('hidden');
+      } else {
+        vhsOverlay.classList.add('hidden');
+      }
+
+      // Film Grain Overlay
+      const filmGrain = document.getElementById('film-grain-layer');
+      if (filterName === 'film') {
+        filmGrain.classList.remove('hidden');
+      } else {
+        filmGrain.classList.add('hidden');
+      }
+
+      // Update badge
+      const filterLabels = {
+        normal: 'Normal',
+        film: '35mm Film',
+        pink: 'Y2K Soft Pink',
+        mono: 'Noir B&W',
+        vhs: 'VHS Camcorder',
+        sepia: 'Sepia 90s'
+      };
+      document.getElementById('active-filter-badge').textContent = `Filter: ${filterLabels[filterName] || filterName}`;
+
+      // Update button active styling
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        if (btn.dataset.filter === filterName) {
+          btn.classList.add('border-neon-pink', 'bg-black');
+          btn.classList.remove('border-black', 'bg-zinc-900');
+        } else {
+          btn.classList.remove('border-neon-pink', 'bg-black');
+          btn.classList.add('border-black', 'bg-zinc-900');
+        }
+      });
+
+      // Update composite canvas preview
+      renderCompositePhotostrip();
+    }
+
+    // --- 7. CAPTURE WORKFLOW & COUNTDOWN ENGINE ---
+    const countdownOverlay = document.getElementById('countdown-overlay');
+    const countdownNumber = document.getElementById('countdown-number');
+    const countdownSubtext = document.getElementById('countdown-subtext');
+    const cameraFlash = document.getElementById('camera-flash');
+    const btnStartCapture = document.getElementById('btn-start-capture');
+
+    async function startCaptureSession() {
+      if (APP_STATE.isCapturing) return;
+      APP_STATE.isCapturing = true;
+      APP_STATE.capturedPhotos = [];
+      updateCaptureDots();
+
+      btnStartCapture.disabled = true;
+      btnStartCapture.classList.add('opacity-50', 'cursor-not-allowed');
+
+      const shotsTotal = APP_STATE.activeLayout === 'single' ? 1 : (APP_STATE.activeLayout === 'newspaper' ? 2 : 4);
+      APP_STATE.totalShotsNeeded = shotsTotal;
+
+      for (let shot = 1; shot <= shotsTotal; shot++) {
+        // Run Countdown 3... 2... 1... CHEESE!
+        await runCountdown(shot, shotsTotal);
+
+        // Flash and audio shutter
+        triggerFlashEffect();
+        sound.playShutterClick();
+
+        // Capture frame from video/demo
+        const capturedFrame = captureCurrentFrame();
+        APP_STATE.capturedPhotos.push(capturedFrame);
+        updateCaptureDots();
+
+        // Render to composite canvas immediately
+        renderCompositePhotostrip();
+
+        // Pause before next shot (if more shots needed)
+        if (shot < shotsTotal) {
+          countdownNumber.textContent = 'POSE!';
+          countdownSubtext.textContent = `Siap-siap untuk Foto ${shot + 1} dari ${shotsTotal}...`;
+          countdownOverlay.classList.remove('hidden');
+          await sleep(1500);
+          countdownOverlay.classList.add('hidden');
+          await sleep(500);
+        }
+      }
+
+      // Finish session
+      countdownOverlay.classList.add('hidden');
+      APP_STATE.isCapturing = false;
+      btnStartCapture.disabled = false;
+      btnStartCapture.classList.remove('opacity-50', 'cursor-not-allowed');
+
+      showToast('Selesai! Photo strip kamu siap diunduh 🎉', 'success');
+    }
+
+    function runCountdown(shotIndex, totalShots) {
+      return new Promise(resolve => {
+        countdownOverlay.classList.remove('hidden');
+        countdownSubtext.textContent = `Foto ${shotIndex} dari ${totalShots} 📸`;
+
+        let count = 3;
+        countdownNumber.textContent = count;
+        sound.playCountdownBeep(480);
+
+        const timer = setInterval(() => {
+          count--;
+          if (count > 0) {
+            countdownNumber.textContent = count;
+            countdownNumber.classList.remove('scale-110');
+            void countdownNumber.offsetWidth; // trigger reflow
+            countdownNumber.classList.add('scale-110');
+            sound.playCountdownBeep(480 + (3 - count) * 80);
+          } else if (count === 0) {
+            countdownNumber.textContent = 'CHEESE!';
+            countdownNumber.classList.remove('scale-110');
+            void countdownNumber.offsetWidth;
+            countdownNumber.classList.add('scale-110');
+            sound.playCheeseSound();
+          } else {
+            clearInterval(timer);
+            countdownOverlay.classList.add('hidden');
+            resolve();
+          }
+        }, 800);
+      });
+    }
+
+    function triggerFlashEffect() {
+      cameraFlash.classList.remove('flash-active');
+      void cameraFlash.offsetWidth;
+      cameraFlash.classList.add('flash-active');
+    }
+
+    function captureCurrentFrame() {
+      const source = APP_STATE.isUsingDemo ? demoImageElem : videoElem;
+      const captureCanvas = document.createElement('canvas');
+      
+      const width = source.videoWidth || source.naturalWidth || 640;
+      const height = source.videoHeight || source.naturalHeight || 480;
+      captureCanvas.width = width;
+      captureCanvas.height = height;
+      const ctx = captureCanvas.getContext('2d');
+
+      // Check mirror mode
+      if (APP_STATE.isMirrored) {
+        ctx.translate(width, 0);
+        ctx.scale(-1, 1);
+      }
+
+      // Draw photo source
+      ctx.drawImage(source, 0, 0, width, height);
+
+      // Reset transform if mirrored
+      if (APP_STATE.isMirrored) {
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+      }
+
+      // Draw companion overlay directly onto frame with free drag & drop coordinates!
+      if (APP_STATE.activeCompanionId && !companionOverlay.classList.contains('hidden')) {
+        const charSvgImg = companionImg;
+        if (charSvgImg && charSvgImg.complete && charSvgImg.naturalWidth > 0) {
+          const compW = width * 0.45 * APP_STATE.companionScale;
+          const compH = (charSvgImg.naturalHeight / charSvgImg.naturalWidth) * compW;
+          
+          // Use exact free draggable coordinates (X & Y percentages)
+          const posX = (APP_STATE.companionX / 100) * width - (compW / 2);
+          const posY = (APP_STATE.companionY / 100) * height - (compH / 2);
+
+          ctx.save();
+          if (APP_STATE.companionFlipped) {
+            ctx.translate(posX + compW, posY);
+            ctx.scale(-1, 1);
+            ctx.drawImage(charSvgImg, 0, 0, compW, compH);
+          } else {
+            ctx.drawImage(charSvgImg, posX, posY, compW, compH);
+          }
+          ctx.restore();
+        }
+      }
+
+      return captureCanvas;
+    }
+
+    function updateCaptureDots() {
+      const dots = document.querySelectorAll('.capture-dot');
+      const count = APP_STATE.capturedPhotos.length;
+      const total = APP_STATE.totalShotsNeeded;
+
+      dots.forEach((dot, idx) => {
+        if (idx < total) {
+          dot.style.display = 'block';
+          if (idx < count) {
+            dot.className = 'capture-dot w-2.5 h-2.5 rounded-full bg-neon-pink border border-neon-pink shadow-neo-sm';
+          } else {
+            dot.className = 'capture-dot w-2.5 h-2.5 rounded-full bg-zinc-700 border border-zinc-600';
+          }
+        } else {
+          dot.style.display = 'none';
+        }
+      });
+      document.getElementById('capture-count-label').textContent = `${count}/${total}`;
+    }
+
+    // --- 8. COMPOSITE CANVAS ENGINE (High-Res Export & Preview) ---
+    const compositeCanvas = document.getElementById('composite-canvas');
+    const exportCanvas = document.getElementById('export-canvas');
+
+    function renderCompositePhotostrip() {
+      drawPhotostripOnCanvas(compositeCanvas, 1);
+    }
+
+    function drawPhotostripOnCanvas(targetCanvas, scaleMultiplier = 1) {
+      const layout = APP_STATE.activeLayout; // 'strip', 'grid', 'single'
+      const ctx = targetCanvas.getContext('2d');
+
+      // Set canvas dimension according to layout
+      let canvasW, canvasH;
+      let slotCount = 4;
+      let slotW, slotH, slotMarginX, slotMarginY;
+      let slots = [];
+
+      if (layout === 'strip') {
+        // 4-Cuts Vertical Strip: standard 600 x 1820
+        canvasW = 600 * scaleMultiplier;
+        canvasH = 1820 * scaleMultiplier;
+        slotCount = 4;
+        slotW = 500 * scaleMultiplier;
+        slotH = 340 * scaleMultiplier;
+        slotMarginX = 50 * scaleMultiplier;
+        const startY = 120 * scaleMultiplier;
+        const gapY = 30 * scaleMultiplier;
+
+        for (let i = 0; i < 4; i++) {
+          slots.push({
+            x: slotMarginX,
+            y: startY + i * (slotH + gapY),
+            w: slotW,
+            h: slotH
+          });
+        }
+      } else if (layout === 'grid') {
+        // 2x2 Grid: 1000 x 1120
+        canvasW = 1000 * scaleMultiplier;
+        canvasH = 1120 * scaleMultiplier;
+        slotCount = 4;
+        slotW = 440 * scaleMultiplier;
+        slotH = 330 * scaleMultiplier;
+        const startX = 45 * scaleMultiplier;
+        const startY = 120 * scaleMultiplier;
+        const gapX = 30 * scaleMultiplier;
+        const gapY = 30 * scaleMultiplier;
+
+        slots = [
+          { x: startX, y: startY, w: slotW, h: slotH },
+          { x: startX + slotW + gapX, y: startY, w: slotW, h: slotH },
+          { x: startX, y: startY + slotH + gapY, w: slotW, h: slotH },
+          { x: startX + slotW + gapX, y: startY + slotH + gapY, w: slotW, h: slotH },
+        ];
+      } else if (layout === 'newspaper') {
+        // BroadSheet Vintage Newspaper Layout: 820 x 1280 (High Detail Archival Print)
+        canvasW = 820 * scaleMultiplier;
+        canvasH = 1280 * scaleMultiplier;
+        slotCount = 2; // Slot 1: Main Photo, Slot 2: Mini candid photo
+        
+        const mainW = 660 * scaleMultiplier;
+        const mainH = 430 * scaleMultiplier;
+        const mainX = 80 * scaleMultiplier;
+        const mainY = 210 * scaleMultiplier;
+
+        const miniW = 180 * scaleMultiplier;
+        const miniH = 200 * scaleMultiplier;
+        const miniX = 560 * scaleMultiplier;
+        const miniY = 745 * scaleMultiplier;
+
+        slots = [
+          { x: mainX, y: mainY, w: mainW, h: mainH, isMain: true },
+          { x: miniX, y: miniY, w: miniW, h: miniH, isMini: true }
+        ];
+      } else {
+        // Single Polaroid: 750 x 950
+        canvasW = 750 * scaleMultiplier;
+        canvasH = 950 * scaleMultiplier;
+        slotCount = 1;
+        slotW = 630 * scaleMultiplier;
+        slotH = 580 * scaleMultiplier;
+        slotMarginX = 60 * scaleMultiplier;
+        const startY = 90 * scaleMultiplier;
+        slots.push({
+          x: slotMarginX,
+          y: startY,
+          w: slotW,
+          h: slotH
+        });
+      }
+
+      targetCanvas.width = canvasW;
+      targetCanvas.height = canvasH;
+
+      // If Newspaper layout is selected, use dedicated archival newspaper renderer
+      if (layout === 'newspaper') {
+        drawNewspaperLayout(ctx, canvasW, canvasH, scaleMultiplier, slots);
+        return;
+      }
+
+      // 1. Draw Frame Background & Motifs
+      drawFrameBackground(ctx, canvasW, canvasH, scaleMultiplier);
+
+      // 2. Draw Photo Slots
+      slots.forEach((slot, index) => {
+        const photoSource = APP_STATE.capturedPhotos[index];
+        ctx.save();
+
+        // Rounded corners clip
+        const radius = APP_STATE.cornerRadius * scaleMultiplier;
+        roundRect(ctx, slot.x, slot.y, slot.w, slot.h, radius);
+        ctx.clip();
+
+        if (photoSource) {
+          // Draw with CSS Filter emulation & proper aspect-ratio cover
+          applyCanvasFilter(ctx, APP_STATE.activeFilter);
+          drawImageCover(ctx, photoSource, slot.x, slot.y, slot.w, slot.h);
+        } else {
+          // Empty slot placeholder
+          ctx.fillStyle = '#1e2230';
+          ctx.fillRect(slot.x, slot.y, slot.w, slot.h);
+          
+          // Slot Number / Pose prompt
+          ctx.fillStyle = '#4b5563';
+          ctx.font = `bold ${24 * scaleMultiplier}px 'Space Grotesk', sans-serif`;
+          ctx.textAlign = 'center';
+          ctx.fillText(`SHOT 0${index + 1}`, slot.x + slot.w / 2, slot.y + slot.h / 2);
+          ctx.font = `${14 * scaleMultiplier}px 'Courier Prime', monospace`;
+          ctx.fillText(`[ Menunggu Pengambilan Foto ]`, slot.x + slot.w / 2, slot.y + slot.h / 2 + 30 * scaleMultiplier);
+        }
+
+        ctx.restore();
+
+        // Neo-Brutalist Slot Outline
+        ctx.save();
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 3 * scaleMultiplier;
+        roundRectStroke(ctx, slot.x, slot.y, slot.w, slot.h, radius);
+        ctx.restore();
+      });
+
+      // 3. Draw Watermark Header Stamp
+      drawHeaderWatermark(ctx, canvasW, scaleMultiplier);
+
+      // 4. Draw Footer Stamps, Date, Barcode & Caption
+      drawFooterDetails(ctx, canvasW, canvasH, scaleMultiplier);
+
+      // 5. Draw Placed Interactive Stickers
+      drawStickersOnCanvas(ctx, canvasW, canvasH, scaleMultiplier);
+    }
+
+    // Helper: Wrap and render multi-line text on canvas
+    function drawWrappedText(ctx, text, x, y, maxWidth, lineHeight, maxLines = 15) {
+      if (!text) return y;
+      const words = text.split(' ');
+      let line = '';
+      let curY = y;
+      let linesDrawn = 0;
+
+      for (let n = 0; n < words.length; n++) {
+        const testLine = line + words[n] + ' ';
+        const metrics = ctx.measureText(testLine);
+        const testWidth = metrics.width;
+        if (testWidth > maxWidth && n > 0) {
+          ctx.fillText(line.trim(), x, curY);
+          line = words[n] + ' ';
+          curY += lineHeight;
+          linesDrawn++;
+          if (linesDrawn >= maxLines) {
+            line = '';
+            break;
+          }
+        } else {
+          line = testLine;
+        }
+      }
+      if (line.trim().length > 0 && linesDrawn < maxLines) {
+        ctx.fillText(line.trim(), x, curY);
+        curY += lineHeight;
+      }
+      return curY;
+    }
+
+    // --- DEDICATED ARCHIVAL NEWSPAPER RENDERER (VINTAGE NEWSPAPER PRINT) ---
+    function drawNewspaperLayout(ctx, w, h, s, slots) {
+      const locKey = APP_STATE.newspaperLocation || 'braga';
+      const data = NEWSPAPER_PRESETS[locKey] || NEWSPAPER_PRESETS.braga;
+
+      // 1. Newsprint Background (Warm ivory vintage paper with authentic tint)
+      ctx.fillStyle = '#f5efe1';
+      ctx.fillRect(0, 0, w, h);
+
+      // Subtle warm gradient
+      const grad = ctx.createLinearGradient(0, 0, w, h);
+      grad.addColorStop(0, 'rgba(235, 222, 195, 0.4)');
+      grad.addColorStop(0.5, 'rgba(247, 243, 230, 0.2)');
+      grad.addColorStop(1, 'rgba(230, 215, 185, 0.5)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
+
+      // Double border rules around the broadsheet
+      const pad = 24 * s;
+      ctx.strokeStyle = '#1e1c18';
+      ctx.lineWidth = 3.5 * s;
+      ctx.strokeRect(pad, pad, w - pad * 2, h - pad * 2);
+      
+      ctx.lineWidth = 1 * s;
+      ctx.strokeRect(pad + 4 * s, pad + 4 * s, w - pad * 2 - 8 * s, h - pad * 2 - 8 * s);
+
+      // 2. Top Header Bar (Metadata Box & Edition Info)
+      const topBarY = 46 * s;
+      ctx.fillStyle = '#1e1c18';
+      ctx.font = `bold ${10 * s}px 'Courier Prime', monospace`;
+      ctx.textAlign = 'left';
+      ctx.fillText(data.volDate, pad + 12 * s, topBarY);
+
+      ctx.textAlign = 'center';
+      ctx.fillText('✦ THE LIVING CHRONICLE // SPECIAL RETRO EDITION ✦', w / 2, topBarY);
+
+      ctx.textAlign = 'right';
+      ctx.fillText(`35¢ • ${data.weather}`, w - pad - 12 * s, topBarY);
+
+      // Rule under top metadata
+      ctx.beginPath();
+      ctx.moveTo(pad + 6 * s, topBarY + 8 * s);
+      ctx.lineTo(w - pad - 6 * s, topBarY + 8 * s);
+      ctx.lineWidth = 1.5 * s;
+      ctx.stroke();
+
+      // 3. Header Atas Koran: Logo/Judul Besar "SnapManner" & Tagline
+      const titleY = 118 * s;
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#151412';
+      ctx.font = `900 ${64 * s}px 'Playfair Display', Georgia, serif`;
+      ctx.fillText('SnapManner', w / 2, titleY);
+
+      // Tagline text
+      const tagY = 143 * s;
+      ctx.font = `bold italic ${13 * s}px 'Playfair Display', serif`;
+      ctx.fillStyle = '#3a352a';
+      ctx.fillText('“Capture the Moment, Make the News!”', w / 2, tagY);
+
+      // Double ornamental divider lines
+      ctx.beginPath();
+      ctx.moveTo(pad + 6 * s, 154 * s);
+      ctx.lineTo(w - pad - 6 * s, 154 * s);
+      ctx.lineWidth = 3.5 * s;
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(pad + 6 * s, 160 * s);
+      ctx.lineTo(w - pad - 6 * s, 160 * s);
+      ctx.lineWidth = 1 * s;
+      ctx.stroke();
+
+      // 4. Sub-Header: Kaligrafi "The Living Archive" (Kiri) & Nama Lokasi Besar (Kanan)
+      const subY = 190 * s;
+      
+      // Left: Calligraphy script
+      ctx.textAlign = 'left';
+      ctx.font = `italic ${28 * s}px 'Pinyon Script', 'Playfair Display', cursive, serif`;
+      ctx.fillStyle = '#1a1815';
+      ctx.fillText('The Living Archive', pad + 14 * s, subY);
+
+      // Center: City subtitle
+      ctx.textAlign = 'center';
+      ctx.font = `bold ${10 * s}px 'Courier Prime', monospace`;
+      ctx.fillStyle = '#5c5446';
+      ctx.fillText(`[ ${data.citySubtitle} ]`, w / 2, subY - 4 * s);
+
+      // Right: Big bold Location name
+      ctx.textAlign = 'right';
+      ctx.font = `900 ${22 * s}px 'Space Grotesk', 'Playfair Display', sans-serif`;
+      ctx.fillStyle = '#11100e';
+      ctx.fillText(data.location, w - pad - 14 * s, subY);
+
+      // Divider under sub-header
+      ctx.beginPath();
+      ctx.moveTo(pad + 6 * s, 200 * s);
+      ctx.lineTo(w - pad - 6 * s, 200 * s);
+      ctx.lineWidth = 1.5 * s;
+      ctx.stroke();
+
+      // 5. Draw Photo Slots (Main Photo Slot & Side Candid Slot)
+      slots.forEach((slot, index) => {
+        const photoSource = APP_STATE.capturedPhotos[index];
+        
+        // Classic photographic press border & matting
+        ctx.save();
+        ctx.fillStyle = '#ffffff';
+        ctx.shadowColor = 'rgba(0,0,0,0.12)';
+        ctx.shadowBlur = 6 * s;
+        ctx.shadowOffsetY = 3 * s;
+        ctx.fillRect(slot.x - 4 * s, slot.y - 4 * s, slot.w + 8 * s, slot.h + 8 * s);
+        ctx.restore();
+
+        ctx.strokeStyle = '#22201c';
+        ctx.lineWidth = 2 * s;
+        ctx.strokeRect(slot.x - 4 * s, slot.y - 4 * s, slot.w + 8 * s, slot.h + 8 * s);
+
+        ctx.save();
+        ctx.rect(slot.x, slot.y, slot.w, slot.h);
+        ctx.clip();
+
+        if (photoSource) {
+          applyCanvasFilter(ctx, APP_STATE.activeFilter);
+          drawImageCover(ctx, photoSource, slot.x, slot.y, slot.w, slot.h);
+        } else {
+          // Empty retro slot placeholder
+          ctx.fillStyle = '#dfd7c5';
+          ctx.fillRect(slot.x, slot.y, slot.w, slot.h);
+          ctx.fillStyle = '#6e6552';
+          ctx.font = `bold ${slot.isMain ? 20 * s : 11 * s}px 'Courier Prime', monospace`;
+          ctx.textAlign = 'center';
+          ctx.fillText(
+            slot.isMain ? `[ FOTO UTAMA : ${data.location} ]` : `[ FOTO MINI CANDID ]`,
+            slot.x + slot.w / 2,
+            slot.y + slot.h / 2
+          );
+          ctx.font = `${slot.isMain ? 11 * s : 9 * s}px 'Courier Prime', monospace`;
+          ctx.fillText(
+            slot.isMain ? 'Klik "Ambil Foto Sekarang" untuk mengisi' : 'Foto kedua photobooth',
+            slot.x + slot.w / 2,
+            slot.y + slot.h / 2 + (slot.isMain ? 24 * s : 16 * s)
+          );
+        }
+        ctx.restore();
+
+        // Corner decorative photo mounts
+        const mSize = 8 * s;
+        ctx.fillStyle = '#1c1914';
+        // Top-left mount
+        ctx.beginPath();
+        ctx.moveTo(slot.x - 4 * s, slot.y - 4 * s);
+        ctx.lineTo(slot.x - 4 * s + mSize, slot.y - 4 * s);
+        ctx.lineTo(slot.x - 4 * s, slot.y - 4 * s + mSize);
+        ctx.fill();
+        // Top-right mount
+        ctx.beginPath();
+        ctx.moveTo(slot.x + slot.w + 4 * s, slot.y - 4 * s);
+        ctx.lineTo(slot.x + slot.w + 4 * s - mSize, slot.y - 4 * s);
+        ctx.lineTo(slot.x + slot.w + 4 * s, slot.y - 4 * s + mSize);
+        ctx.fill();
+      });
+
+      // Photo 1 Caption under main photo
+      const captionY = 658 * s;
+      ctx.fillStyle = '#3a3429';
+      ctx.font = `italic ${10 * s}px 'Courier Prime', monospace`;
+      ctx.textAlign = 'center';
+      ctx.fillText(`PLATE NO. 01 — ARCHIVAL CAPTURE AT ${data.location} // PHOTO COURTESY OF SNAPMANNER`, w / 2, captionY);
+
+      // Dividing rule below main photo
+      ctx.beginPath();
+      ctx.moveTo(pad + 6 * s, 672 * s);
+      ctx.lineTo(w - pad - 6 * s, 672 * s);
+      ctx.lineWidth = 2 * s;
+      ctx.strokeStyle = '#1e1c18';
+      ctx.stroke();
+
+      // 6. Article Section Below Main Photo
+      // Main Article Headline across left columns
+      const headY = 702 * s;
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#12110f';
+      ctx.font = `900 ${18 * s}px 'Playfair Display', Georgia, serif`;
+      
+      const headMaxW = 460 * s;
+      drawWrappedText(ctx, data.mainHeadline, pad + 14 * s, headY, headMaxW, 22 * s, 2);
+
+      // Lead summary paragraph
+      const leadY = 748 * s;
+      ctx.fillStyle = '#26231c';
+      ctx.font = `bold italic ${10 * s}px 'Playfair Display', serif`;
+      drawWrappedText(ctx, data.leadText, pad + 14 * s, leadY, 460 * s, 14 * s, 3);
+
+      // Divider under lead
+      ctx.beginPath();
+      ctx.moveTo(pad + 14 * s, 796 * s);
+      ctx.lineTo(pad + 474 * s, 796 * s);
+      ctx.lineWidth = 1 * s;
+      ctx.strokeStyle = '#8c8069';
+      ctx.stroke();
+
+      // Column 1 with Drop Cap
+      const col1X = pad + 14 * s;
+      const colW = 216 * s;
+      const colY = 822 * s;
+
+      const firstLetter = data.column1.charAt(0);
+      const remainingCol1 = data.column1.slice(1);
+
+      ctx.fillStyle = '#151412';
+      ctx.font = `900 ${44 * s}px 'Playfair Display', Georgia, serif`;
+      ctx.fillText(firstLetter, col1X, colY + 32 * s);
+
+      ctx.font = `${10 * s}px 'Courier Prime', monospace`;
+      ctx.fillStyle = '#2c2921';
+      drawWrappedText(ctx, remainingCol1, col1X + 32 * s, colY + 8 * s, colW - 32 * s, 14 * s, 3);
+      drawWrappedText(ctx, remainingCol1.slice(120), col1X, colY + 54 * s, colW, 14 * s, 14);
+
+      // Column 2
+      const col2X = col1X + colW + 18 * s;
+      drawWrappedText(ctx, data.column2, col2X, colY + 8 * s, colW, 14 * s, 18);
+
+      // Vertical Divider line between left main article and right side section
+      const vertX = 540 * s;
+      ctx.beginPath();
+      ctx.moveTo(vertX, 678 * s);
+      ctx.lineTo(vertX, 1195 * s);
+      ctx.lineWidth = 1 * s;
+      ctx.strokeStyle = '#8c8069';
+      ctx.stroke();
+
+      // 7. Side Column (Right side, containing secondary photo and side story)
+      const sideX = 556 * s;
+      const sideW = 210 * s;
+
+      // Side Section Title
+      ctx.fillStyle = '#151412';
+      ctx.font = `900 ${14 * s}px 'Playfair Display', serif`;
+      ctx.fillText(data.sideHeadline, sideX, 712 * s);
+
+      ctx.beginPath();
+      ctx.moveTo(sideX, 722 * s);
+      ctx.lineTo(w - pad - 14 * s, 722 * s);
+      ctx.lineWidth = 1.5 * s;
+      ctx.strokeStyle = '#1e1c18';
+      ctx.stroke();
+
+      // Caption for secondary photo
+      const miniCapY = 965 * s;
+      ctx.fillStyle = '#473f31';
+      ctx.font = `italic ${9 * s}px 'Courier Prime', monospace`;
+      ctx.fillText(`PLATE 02 — CANDID MOMENTS`, sideX + 8 * s, miniCapY);
+
+      // Side column article text below secondary photo
+      const sideTextY = 990 * s;
+      ctx.fillStyle = '#2b271f';
+      ctx.font = `${10 * s}px 'Courier Prime', monospace`;
+      drawWrappedText(ctx, data.sideText, sideX, sideTextY, sideW, 14 * s, 12);
+
+      // 8. Footer Section: Barcode & Footer Headline
+      const footY = 1205 * s;
+      ctx.beginPath();
+      ctx.moveTo(pad + 6 * s, footY);
+      ctx.lineTo(w - pad - 6 * s, footY);
+      ctx.lineWidth = 2 * s;
+      ctx.strokeStyle = '#1e1c18';
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(pad + 6 * s, footY + 4 * s);
+      ctx.lineTo(w - pad - 6 * s, footY + 4 * s);
+      ctx.lineWidth = 1 * s;
+      ctx.stroke();
+
+      ctx.fillStyle = '#1e1c18';
+      ctx.font = `bold ${10 * s}px 'Courier Prime', monospace`;
+      ctx.textAlign = 'left';
+      ctx.fillText(data.footerHeadline, pad + 14 * s, footY + 22 * s);
+
+      // Retro Barcode on footer right
+      const barcodeW = 140 * s;
+      const barcodeX = w - pad - barcodeW - 14 * s;
+      const barcodeY = footY + 10 * s;
+      const pattern = [2, 1, 3, 1, 2, 4, 1, 2, 1, 3, 2, 1, 4, 1, 2, 3, 1, 2, 3, 1, 2];
+      let curBX = barcodeX;
+      pattern.forEach(bw => {
+        ctx.fillRect(curBX, barcodeY, bw * s, 18 * s);
+        curBX += (bw + 2) * s;
+      });
+
+      ctx.font = `${8 * s}px 'Courier Prime', monospace`;
+      ctx.textAlign = 'right';
+      ctx.fillText(`ARCHIVE-SN-${locKey.toUpperCase()}-2026`, w - pad - 14 * s, footY + 36 * s);
+
+      // Draw placed interactive stickers if any
+      drawStickersOnCanvas(ctx, w, h, s);
+    }
+
+    // Helper: Rounded Rectangle
+    function roundRect(ctx, x, y, width, height, radius) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+    }
+
+    function roundRectStroke(ctx, x, y, width, height, radius) {
+      roundRect(ctx, x, y, width, height, radius);
+      ctx.stroke();
+    }
+
+    // Helper: Draw image with object-fit: cover inside specified rect
+    function drawImageCover(ctx, img, x, y, w, h) {
+      const imgW = img.videoWidth || img.naturalWidth || img.width || w;
+      const imgH = img.videoHeight || img.naturalHeight || img.height || h;
+      const imgRatio = imgW / imgH;
+      const slotRatio = w / h;
+      
+      let sx = 0, sy = 0, sw = imgW, sh = imgH;
+      if (imgRatio > slotRatio) {
+        sw = imgH * slotRatio;
+        sx = (imgW - sw) / 2;
+      } else {
+        sh = imgW / slotRatio;
+        sy = (imgH - sh) / 2;
+      }
+      ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
+    }
+
+    // Draw Frame Background (Solid / Checker / 35mm / Hearts / Blok M / Cyber)
+    function drawFrameBackground(ctx, w, h, s) {
+      const motif = APP_STATE.frameMotif;
+      const baseColor = APP_STATE.frameColor;
+
+      // Base solid fill
+      ctx.fillStyle = baseColor;
+      ctx.fillRect(0, 0, w, h);
+
+      if (motif === 'checker') {
+        const sq = 30 * s;
+        ctx.fillStyle = baseColor === '#12141c' ? '#ff2a85' : '#000000';
+        for (let x = 0; x < w; x += sq * 2) {
+          for (let y = 0; y < h; y += sq * 2) {
+            ctx.fillRect(x, y, sq, sq);
+            ctx.fillRect(x + sq, y + sq, sq, sq);
+          }
+        }
+      } else if (motif === 'filmstrip') {
+        // Kodak/Fuji 35mm film borders with perforations
+        ctx.fillStyle = '#0a0a0a';
+        ctx.fillRect(0, 0, 40 * s, h);
+        ctx.fillRect(w - 40 * s, 0, 40 * s, h);
+
+        ctx.fillStyle = '#ffffff';
+        const holeW = 16 * s;
+        const holeH = 24 * s;
+        const holeGap = 45 * s;
+        for (let y = 30 * s; y < h - 40 * s; y += holeGap) {
+          // Left sprockets
+          roundRect(ctx, 12 * s, y, holeW, holeH, 4 * s);
+          ctx.fill();
+          // Right sprockets
+          roundRect(ctx, w - 28 * s, y, holeW, holeH, 4 * s);
+          ctx.fill();
+        }
+
+        // Film edge numbering
+        ctx.fillStyle = '#d97706';
+        ctx.font = `bold ${10 * s}px 'Courier Prime', monospace`;
+        ctx.fillText('KODAK 400TX', 10 * s, 20 * s);
+        ctx.fillText('24A ▶', w - 50 * s, 20 * s);
+      } else if (motif === 'hearts') {
+        ctx.fillStyle = '#f472b6';
+        ctx.font = `${20 * s}px sans-serif`;
+        for (let x = 20 * s; x < w; x += 60 * s) {
+          ctx.fillText('💖', x, 40 * s);
+          ctx.fillText('💖', x, h - 30 * s);
+        }
+      } else if (motif === 'blokm') {
+        // Blok M vintage newspaper styling
+        ctx.fillStyle = '#e5e7eb';
+        ctx.font = `900 ${18 * s}px 'Space Grotesk', sans-serif`;
+        ctx.fillText('BLOK M CHRONICLES', 40 * s, 45 * s);
+        ctx.font = `${10 * s}px 'Courier Prime', monospace`;
+        ctx.fillText('EDISI KHUSUS AKHIR PEKAN // JAKARTA SELATAN', 40 * s, 65 * s);
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 2 * s;
+        ctx.beginPath();
+        ctx.moveTo(40 * s, 75 * s);
+        ctx.lineTo(w - 40 * s, 75 * s);
+        ctx.stroke();
+      } else if (motif === 'cyber') {
+        // Cyberpunk neon gradient top/bottom borders
+        const grad = ctx.createLinearGradient(0, 0, w, 0);
+        grad.addColorStop(0, '#ff2a85');
+        grad.addColorStop(0.5, '#ffe600');
+        grad.addColorStop(1, '#00f0ff');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, w, 8 * s);
+        ctx.fillRect(0, h - 8 * s, w, 8 * s);
+      }
+
+      // Outer crisp Neo-brutalist border
+      ctx.strokeStyle = '#000000';
+      ctx.lineWidth = 6 * s;
+      ctx.strokeRect(0, 0, w, h);
+    }
+
+    // Apply Filter to Canvas Context
+    function applyCanvasFilter(ctx, filterName) {
+      if (filterName === 'film') {
+        ctx.filter = 'contrast(1.15) saturate(1.25) sepia(0.2) brightness(1.02)';
+      } else if (filterName === 'pink') {
+        ctx.filter = 'contrast(0.95) brightness(1.08) saturate(1.3) hue-rotate(-15deg)';
+      } else if (filterName === 'mono') {
+        ctx.filter = 'grayscale(1) contrast(1.5) brightness(0.95)';
+      } else if (filterName === 'vhs') {
+        ctx.filter = 'contrast(1.2) saturate(1.4) hue-rotate(25deg) brightness(1.05)';
+      } else if (filterName === 'sepia') {
+        ctx.filter = 'sepia(0.75) contrast(1.1) brightness(0.95) saturate(0.85)';
+      } else {
+        ctx.filter = 'none';
+      }
+    }
+
+    // Header Watermark Stamp
+    function drawHeaderWatermark(ctx, w, s) {
+      const watermark = APP_STATE.watermarkText;
+      const isDarkFrame = APP_STATE.frameColor === '#12141c';
+
+      ctx.save();
+      ctx.textAlign = 'center';
+      ctx.font = `900 ${22 * s}px 'Space Grotesk', sans-serif`;
+
+      // Shadow
+      ctx.fillStyle = '#000000';
+      ctx.fillText(watermark, w / 2 + 2 * s, 72 * s);
+
+      // Text color
+      ctx.fillStyle = isDarkFrame ? '#ffe600' : '#111827';
+      ctx.fillText(watermark, w / 2, 70 * s);
+
+      ctx.restore();
+    }
+
+    // Footer Details: Caption, Date, Barcode
+    function drawFooterDetails(ctx, w, h, s) {
+      const isDarkFrame = APP_STATE.frameColor === '#12141c';
+      const textColor = isDarkFrame ? '#ffffff' : '#111827';
+      const subColor = isDarkFrame ? '#9ca3af' : '#4b5563';
+
+      ctx.save();
+
+      // 1. Custom Caption
+      if (APP_STATE.customCaption) {
+        ctx.textAlign = 'center';
+        ctx.font = `bold italic ${18 * s}px 'Courier Prime', monospace`;
+        ctx.fillStyle = textColor;
+        ctx.fillText(`"${APP_STATE.customCaption}"`, w / 2, h - 90 * s);
+      }
+
+      // 2. Date & Time Stamp
+      if (APP_STATE.showDateStamp) {
+        const now = new Date();
+        const dateStr = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, '0')}.${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+        
+        ctx.textAlign = 'center';
+        ctx.font = `${13 * s}px 'Courier Prime', monospace`;
+        ctx.fillStyle = subColor;
+        ctx.fillText(`✦ REC: ${dateStr} ✦ JAKARTA`, w / 2, h - 65 * s);
+      }
+
+      // 3. Retro Barcode graphic at bottom
+      const barcodeW = 180 * s;
+      const barcodeX = (w - barcodeW) / 2;
+      const barcodeY = h - 45 * s;
+      ctx.fillStyle = isDarkFrame ? '#ffffff' : '#000000';
+
+      // Barcode bars
+      const pattern = [3, 1, 4, 1, 2, 3, 1, 2, 4, 2, 1, 3, 2, 4, 1, 3, 2, 1, 4, 2, 1, 3, 4, 1];
+      let curX = barcodeX;
+      pattern.forEach(barWidth => {
+        ctx.fillRect(curX, barcodeY, barWidth * s, 22 * s);
+        curX += (barWidth + 2) * s;
+      });
+
+      // Barcode text
+      ctx.font = `${9 * s}px 'Courier Prime', monospace`;
+      ctx.textAlign = 'center';
+      ctx.fillText('VB-8291-BLOKM-2026', w / 2, h - 12 * s);
+
+      ctx.restore();
+    }
+
+    // Draw Placed Stickers on Canvas
+    function drawStickersOnCanvas(ctx, w, h, s) {
+      APP_STATE.stickers.forEach(st => {
+        if (st.img && st.img.complete && st.img.naturalWidth > 0) {
+          ctx.save();
+          const posX = (st.x / 100) * w;
+          const posY = (st.y / 100) * h;
+          const size = st.size * s;
+
+          ctx.translate(posX, posY);
+          if (st.rotation) ctx.rotate(st.rotation * Math.PI / 180);
+
+          // Draw image centered
+          ctx.drawImage(st.img, -size / 2, -size / 2, size, size);
+          ctx.restore();
+        }
+      });
+    }
+
+    // --- 9. INTERACTIVE STICKERS SYSTEM (Drag, Resize, Drop) ---
+    const stickerLibraryElem = document.getElementById('sticker-library');
+    const stickersSurface = document.getElementById('stickers-interactive-surface');
+    const stickerScaleSlider = document.getElementById('sticker-scale-slider');
+    const btnDeleteSticker = document.getElementById('btn-delete-selected-sticker');
+    const btnClearStickers = document.getElementById('btn-clear-stickers');
+
+    function initStickerLibrary() {
+      stickerLibraryElem.innerHTML = '';
+      STICKER_LIBRARY.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'btn-brutal bg-zinc-900 border border-zinc-700 hover:border-neon-pink p-2 rounded-lg cursor-pointer flex flex-col items-center justify-center transition group';
+        div.innerHTML = `
+          <div class="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
+            ${item.svg}
+          </div>
+          <span class="text-[9px] font-mono text-zinc-400 mt-1 truncate max-w-full">${item.label}</span>
+        `;
+        div.onclick = () => addStickerToStage(item);
+        stickerLibraryElem.appendChild(div);
+      });
+    }
+
+    function addStickerToStage(stickerData) {
+      const img = new Image();
+      const newSticker = {
+        id: 'stk_' + Date.now(),
+        svg: stickerData.svg,
+        img: img,
+        x: 50, // center 50%
+        y: 40 + Math.random() * 20, // 40-60%
+        size: 70,
+        rotation: (Math.random() * 20) - 10
+      };
+
+      img.onload = () => {
+        renderCompositePhotostrip();
+      };
+      img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(stickerData.svg)}`;
+
+      APP_STATE.stickers.push(newSticker);
+      APP_STATE.selectedStickerId = newSticker.id;
+      sound.playStickerPop();
+
+      renderInteractiveStickerDOM();
+      renderCompositePhotostrip();
+      showToast(`Stiker "${stickerData.label}" ditambahkan! Bisa digeser.`, 'info');
+    }
+
+    function renderInteractiveStickerDOM() {
+      stickersSurface.innerHTML = '';
+
+      APP_STATE.stickers.forEach(st => {
+        const el = document.createElement('div');
+        el.className = `sticker-item absolute transform -translate-x-1/2 -translate-y-1/2 ${
+          APP_STATE.selectedStickerId === st.id ? 'sticker-selected' : ''
+        }`;
+        el.style.left = `${st.x}%`;
+        el.style.top = `${st.y}%`;
+        el.style.width = `${st.size}px`;
+        el.style.height = `${st.size}px`;
+        el.style.transform = `translate(-50%, -50%) rotate(${st.rotation}deg)`;
+        el.innerHTML = st.svg;
+
+        // Mouse/Touch Drag Handlers
+        let isDragging = false;
+        let startX, startY;
+        let initialX, initialY;
+
+        const onPointerDown = (e) => {
+          e.stopPropagation();
+          isDragging = true;
+          APP_STATE.selectedStickerId = st.id;
+          stickerScaleSlider.value = st.size;
+          renderInteractiveStickerDOM();
+
+          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+          startX = clientX;
+          startY = clientY;
+          initialX = st.x;
+          initialY = st.y;
+
+          window.addEventListener('pointermove', onPointerMove);
+          window.addEventListener('pointerup', onPointerUp);
+        };
+
+        const onPointerMove = (e) => {
+          if (!isDragging) return;
+          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+          const rect = stickersSurface.getBoundingClientRect();
+          const deltaXPercent = ((clientX - startX) / rect.width) * 100;
+          const deltaYPercent = ((clientY - startY) / rect.height) * 100;
+
+          st.x = Math.max(5, Math.min(95, initialX + deltaXPercent));
+          st.y = Math.max(5, Math.min(95, initialY + deltaYPercent));
+
+          el.style.left = `${st.x}%`;
+          el.style.top = `${st.y}%`;
+
+          renderCompositePhotostrip();
+        };
+
+        const onPointerUp = () => {
+          isDragging = false;
+          window.removeEventListener('pointermove', onPointerMove);
+          window.removeEventListener('pointerup', onPointerUp);
+        };
+
+        el.addEventListener('pointerdown', onPointerDown);
+        stickersSurface.appendChild(el);
+      });
+    }
+
+    stickerScaleSlider.oninput = (e) => {
+      const val = parseInt(e.target.value);
+      if (APP_STATE.selectedStickerId) {
+        const st = APP_STATE.stickers.find(s => s.id === APP_STATE.selectedStickerId);
+        if (st) {
+          st.size = val;
+          renderInteractiveStickerDOM();
+          renderCompositePhotostrip();
+        }
+      }
+    };
+
+    btnDeleteSticker.onclick = () => {
+      if (APP_STATE.selectedStickerId) {
+        APP_STATE.stickers = APP_STATE.stickers.filter(s => s.id !== APP_STATE.selectedStickerId);
+        APP_STATE.selectedStickerId = null;
+        renderInteractiveStickerDOM();
+        renderCompositePhotostrip();
+        showToast('Stiker dihapus.', 'info');
+      }
+    };
+
+    btnClearStickers.onclick = () => {
+      if (APP_STATE.stickers.length === 0) return;
+      APP_STATE.stickers = [];
+      APP_STATE.selectedStickerId = null;
+      renderInteractiveStickerDOM();
+      renderCompositePhotostrip();
+      showToast('Semua stiker dibersihkan.', 'info');
+    };
+
+    // --- 10. EXPORT & DOWNLOAD ENGINE ---
+    const btnDownload = document.getElementById('btn-download');
+    const btnShare = document.getElementById('btn-share');
+
+    btnDownload.onclick = () => {
+      // Render Ultra High-Resolution (2x Retina scale)
+      drawPhotostripOnCanvas(exportCanvas, 2);
+
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+      const filename = `vibes-booth-${APP_STATE.mode}-${timestamp}.png`;
+
+      // Client-side download trigger
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = exportCanvas.toDataURL('image/png', 1.0);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      showToast('Photo strip berhasil diunduh! Silakan cek file kamu 💾', 'success');
+    };
+
+    btnShare.onclick = async () => {
+      try {
+        drawPhotostripOnCanvas(exportCanvas, 2);
+        exportCanvas.toBlob(async (blob) => {
+          if (!blob) return;
+          if (navigator.clipboard && window.ClipboardItem) {
+            await navigator.clipboard.write([
+              new ClipboardItem({ 'image/png': blob })
+            ]);
+            showToast('Gambar berhasil disalin ke Clipboard! 📋', 'success');
+          } else {
+            showToast('Fitur salin tidak didukung pada browser ini, silakan klik Download.', 'warn');
+          }
+        });
+      } catch (err) {
+        showToast('Gagal menyalin gambar.', 'warn');
+      }
+    };
+
+    // --- 11. MODE SWITCHER & MODAL LOGIC ---
+    const modalMode = document.getElementById('modal-mode-select');
+    const btnChangeMode = document.getElementById('btn-change-mode');
+    const btnCloseModal = document.getElementById('btn-close-modal');
+    const currentModeTitle = document.getElementById('current-mode-title');
+    const currentModeIndicator = document.getElementById('current-mode-indicator');
+    const companionBoxTitle = document.getElementById('companion-box-title');
+    const companionBoxIcon = document.getElementById('companion-box-icon');
+
+    function applyMode(modeName) {
+      APP_STATE.mode = modeName;
+      modalMode.classList.add('hidden');
+
+      const modeInfo = {
+        classic: {
+          title: 'Classic Photobooth',
+          color: '#ff2a85',
+          companionActive: false
+        },
+        celebrity: {
+          title: 'Virtual Idol & Artis',
+          color: '#00f0ff',
+          companionActive: true,
+          boxTitle: 'Pilih Idol & Artis Favorit:',
+          boxIcon: '🎤'
+        },
+        anime: {
+          title: 'Anime & Cartoon',
+          color: '#ffe600',
+          companionActive: true,
+          boxTitle: 'Pilih Karakter Anime / Kartun:',
+          boxIcon: '🌸'
+        }
+      };
+
+      const info = modeInfo[modeName];
+      currentModeTitle.textContent = info.title;
+      currentModeIndicator.style.backgroundColor = info.color;
+
+      if (info.companionActive) {
+        companionBox.classList.remove('hidden');
+        companionBoxTitle.textContent = info.boxTitle;
+        companionBoxIcon.textContent = info.boxIcon;
+        renderCompanionThumbnails();
+        // Auto-select first companion
+        const first = COMPANION_DATA[modeName][0];
+        if (first) selectCompanion(first.id);
+      } else {
+        companionBox.classList.add('hidden');
+        companionOverlay.classList.add('hidden');
+        APP_STATE.activeCompanionId = null;
+      }
+
+      showToast(`Mode diubah: ${info.title}`, 'info');
+    }
+
+    btnChangeMode.onclick = () => modalMode.classList.remove('hidden');
+    btnCloseModal.onclick = () => modalMode.classList.add('hidden');
+
+    document.querySelectorAll('.mode-card').forEach(card => {
+      card.onclick = () => {
+        const selected = card.dataset.selectMode;
+        applyMode(selected);
+      };
+    });
+
+    // --- 12. UI CONTROLS & EVENT BINDINGS ---
+    // Layout Tabs
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll('.tab-btn').forEach(b => {
+          b.className = b.className.replace('bg-neon-pink text-white shadow-neo-sm', 'text-zinc-300 hover:text-white');
+        });
+        btn.className = 'tab-btn flex-1 py-1.5 px-2 rounded-lg font-display font-bold text-xs bg-neon-pink text-white border border-black shadow-neo-sm';
+
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
+        document.getElementById(btn.dataset.tab).classList.remove('hidden');
+      };
+    });
+
+    // Layout Format buttons
+    document.querySelectorAll('.layout-btn').forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll('.layout-btn').forEach(b => {
+          b.classList.remove('border-neon-pink', 'bg-black');
+          b.classList.add('border-black', 'bg-zinc-900');
+        });
+        btn.classList.add('border-neon-pink', 'bg-black');
+        btn.classList.remove('border-black', 'bg-zinc-900');
+
+        APP_STATE.activeLayout = btn.dataset.layout;
+        APP_STATE.totalShotsNeeded = btn.dataset.layout === 'single' ? 1 : 4;
+        updateCaptureDots();
+        renderCompositePhotostrip();
+      };
+    });
+
+    // Frame Motif buttons
+    document.querySelectorAll('.frame-motif-btn').forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll('.frame-motif-btn').forEach(b => {
+          b.classList.remove('border-neon-pink', 'bg-black');
+          b.classList.add('border-black', 'bg-zinc-900');
+        });
+        btn.classList.add('border-neon-pink', 'bg-black');
+        btn.classList.remove('border-black', 'bg-zinc-900');
+
+        APP_STATE.frameMotif = btn.dataset.motif;
+        renderCompositePhotostrip();
+      };
+    });
+
+    // Frame Color buttons
+    document.querySelectorAll('.frame-color-btn').forEach(btn => {
+      btn.onclick = () => {
+        APP_STATE.frameColor = btn.dataset.color;
+        document.getElementById('photostrip-stage').style.backgroundColor = btn.dataset.color;
+        renderCompositePhotostrip();
+      };
+    });
+
+    document.getElementById('frame-custom-color').oninput = (e) => {
+      APP_STATE.frameColor = e.target.value;
+      document.getElementById('photostrip-stage').style.backgroundColor = e.target.value;
+      renderCompositePhotostrip();
+    };
+
+    // Corner Style
+    document.querySelectorAll('.corner-btn').forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll('.corner-btn').forEach(b => {
+          b.className = 'corner-btn btn-brutal px-2.5 py-1 text-xs font-bold rounded bg-zinc-800 text-zinc-400 hover:text-white';
+        });
+        btn.className = 'corner-btn btn-brutal px-2.5 py-1 text-xs font-bold rounded bg-neon-pink text-white';
+        APP_STATE.cornerRadius = parseInt(btn.dataset.radius);
+        renderCompositePhotostrip();
+      };
+    });
+
+    // Watermark selection
+    const selectWatermark = document.getElementById('select-watermark');
+    const customWatermarkInput = document.getElementById('custom-watermark-input');
+    selectWatermark.onchange = (e) => {
+      if (e.target.value === 'CUSTOM') {
+        customWatermarkInput.classList.remove('hidden');
+        APP_STATE.watermarkText = customWatermarkInput.value || 'VIBES BOOTH';
+      } else {
+        customWatermarkInput.classList.add('hidden');
+        APP_STATE.watermarkText = e.target.value;
+      }
+      renderCompositePhotostrip();
+    };
+    customWatermarkInput.oninput = (e) => {
+      APP_STATE.watermarkText = e.target.value.toUpperCase();
+      renderCompositePhotostrip();
+    };
+
+    // Toggle Date Stamp
+    document.getElementById('toggle-date-stamp').onchange = (e) => {
+      APP_STATE.showDateStamp = e.target.checked;
+      renderCompositePhotostrip();
+    };
+
+    // Caption Input
+    const inputCustomCaption = document.getElementById('input-custom-caption');
+    const captionCharCount = document.getElementById('caption-char-count');
+    inputCustomCaption.oninput = (e) => {
+      APP_STATE.customCaption = e.target.value;
+      captionCharCount.textContent = `${e.target.value.length}/40`;
+      renderCompositePhotostrip();
+    };
+
+    // Companion position buttons
+    document.querySelectorAll('.companion-pos-btn').forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll('.companion-pos-btn').forEach(b => {
+          b.className = 'companion-pos-btn py-1 rounded text-center font-bold text-zinc-400 hover:text-white';
+        });
+        btn.className = 'companion-pos-btn py-1 rounded text-center font-bold bg-neon-pink text-white';
+        APP_STATE.companionPosition = btn.dataset.pos;
+        updateCompanionTransform();
+      };
+    });
+
+    // Companion scale slider
+    const compScaleSlider = document.getElementById('companion-scale-slider');
+    const compScaleVal = document.getElementById('companion-scale-val');
+    compScaleSlider.oninput = (e) => {
+      const val = parseInt(e.target.value);
+      APP_STATE.companionScale = val / 100;
+      compScaleVal.textContent = `${val}%`;
+      updateCompanionTransform();
+    };
+
+    // Flip Companion
+    document.getElementById('btn-flip-companion').onclick = () => {
+      APP_STATE.companionFlipped = !APP_STATE.companionFlipped;
+      updateCompanionTransform();
+    };
+
+    // Custom PNG Upload for Companion
+    document.getElementById('input-custom-companion').onchange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const customId = 'custom_' + Date.now();
+          const customObj = {
+            id: customId,
+            title: 'Custom Upload',
+            badge: 'User PNG',
+            svg: event.target.result
+          };
+          COMPANION_DATA[APP_STATE.mode].unshift(customObj);
+          renderCompanionThumbnails();
+          selectCompanion(customId);
+          showToast('Gambar custom berhasil dipasang sebagai overlay!', 'success');
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+
+    // Filter Buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.onclick = () => setCameraFilter(btn.dataset.filter);
+    });
+
+    // Mirror Toggle
+    document.getElementById('btn-mirror-toggle').onclick = () => {
+      APP_STATE.isMirrored = !APP_STATE.isMirrored;
+      if (APP_STATE.isMirrored) {
+        videoElem.classList.add('mirror-mode');
+        demoImageElem.classList.add('mirror-mode');
+        showToast('Mirror aktif (Kamera Depan)', 'info');
+      } else {
+        videoElem.classList.remove('mirror-mode');
+        demoImageElem.classList.remove('mirror-mode');
+        showToast('Mirror nonaktif', 'info');
+      }
+    };
+
+    // Flip Camera (Front / Back on Smartphone)
+    document.getElementById('btn-flip-cam').onclick = () => {
+      APP_STATE.facingMode = APP_STATE.facingMode === 'user' ? 'environment' : 'user';
+      initCamera();
+    };
+
+    // Retake / Reset Photos
+    document.getElementById('btn-retake').onclick = () => {
+      if (APP_STATE.capturedPhotos.length === 0) {
+        showToast('Belum ada foto yang diambil.', 'info');
+        return;
+      }
+      APP_STATE.capturedPhotos = [];
+      updateCaptureDots();
+      renderCompositePhotostrip();
+      showToast('Sesi di-reset. Siap foto ulang!', 'info');
+    };
+
+    // Sound Toggle
+    const btnToggleSound = document.getElementById('btn-toggle-sound');
+    const soundIcon = document.getElementById('sound-icon');
+    btnToggleSound.onclick = () => {
+      APP_STATE.soundEnabled = !APP_STATE.soundEnabled;
+      soundIcon.textContent = APP_STATE.soundEnabled ? '🔊' : '🔇';
+      showToast(APP_STATE.soundEnabled ? 'Suara diaktifkan' : 'Suara dimatikan', 'info');
+    };
+
+    // Start Capture trigger
+    btnStartCapture.onclick = () => startCaptureSession();
+
+    // Fallback Banner Actions
+    document.getElementById('btn-request-cam').onclick = () => initCamera();
+    document.getElementById('btn-use-demo-photo').onclick = () => loadDemoSelfie();
+    document.getElementById('input-custom-photo').onchange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          APP_STATE.isUsingDemo = true;
+          fallbackBanner.classList.add('hidden');
+          videoElem.classList.add('hidden');
+          demoImageElem.classList.remove('hidden');
+          demoImageElem.src = event.target.result;
+          showToast('Foto kustom kamu siap digunakan!', 'success');
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+
+    // Toast Notification helper
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      
+      const colors = {
+        success: 'bg-neon-pink text-white border-black',
+        warn: 'bg-neon-yellow text-black border-black',
+        info: 'bg-dark-card text-white border-neon-pink'
+      };
+
+      toast.className = `btn-brutal pointer-events-auto px-3.5 py-2 rounded-lg border-2 text-xs font-bold font-mono shadow-neo transition-all duration-300 transform translate-y-3 opacity-0 ${colors[type] || colors.info}`;
+      toast.textContent = message;
+
+      container.appendChild(toast);
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-y-3', 'opacity-0');
+      });
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 3200);
+    }
+
+    function sleep(ms) {
+      return new Promise(r => setTimeout(r, ms));
+    }
+
+    // --- 13. INITIALIZATION ON PAGE LOAD ---
+    window.addEventListener('DOMContentLoaded', () => {
+      // Initialize Sticker Drawer
+      initStickerLibrary();
+
+      // Initial Canvas rendering (empty slots)
+      renderCompositePhotostrip();
+
+      // Start Camera
+      initCamera();
+
+      // Show landing modal by default on first visit
+      modalMode.classList.remove('hidden');
+
+      // Update current datetime text
+      const now = new Date();
+      const dateStr = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, '0')}.${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+      document.getElementById('current-datetime-preview').textContent = dateStr;
+
+      // Re-render once web fonts are fully loaded
+      if (document.fonts) {
+        document.fonts.ready.then(() => {
+          renderCompositePhotostrip();
+        });
+      }
+    });
+
+  </script>
+</body>
+</html>
